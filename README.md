@@ -1,4 +1,3 @@
 # vpsfiles
 
-# Docker Nginx Demo
 
