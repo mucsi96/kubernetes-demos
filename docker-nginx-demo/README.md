@@ -15,10 +15,9 @@ sudo apt-get install docker-compose-plugin
 ```
 
 ```bash
-cd ~
-mkdir docker-nginx-demo
-cd docker-nginx-demo
-mddir src
-curl -o docker-nginx-demo/docker-compose.yml 
-
+mkdir -p ~/docker-nginx-demo/src/
+curl -o ~/docker-nginx-demo/docker-compose.yml https://raw.githubusercontent.com/mucsi96/vpsfiles/main/docker-nginx-demo/docker-compose.yml
+curl -o ~/docker-nginx-demo/src/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/docker-nginx-demo/src/index.html
+docker compose up
+curl localhost
 ```
