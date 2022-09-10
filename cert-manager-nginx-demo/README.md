@@ -1,4 +1,4 @@
-# Helm Nginx demo
+# Cert Manager Nginx demo
 
 Install Docker Desktop on local machine.
 
@@ -21,14 +21,53 @@ kubectl get nodes
 
 Adding index.html on the server
 ```bash
-mkdir -p /shared/helm-nginx-demo
-curl -o /shared/helm-nginx-demo/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/helm-nginx-demo/src/index.html
+mkdir -p /shared/cert-manager-nginx-demo
+curl -o /shared/cert-manager-nginx-demo/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/cert-manager-nginx-demo/src/index.html
+```
+
+
+Add the latest helm repository for the ingress-nginx
+```bash
+helm repo add jetstack https://charts.jetstack.io
+```
+
+Update local Helm chart repository cache
+```bash
+helm repo update
+```
+
+Install `cert-manager`
+```bash
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.9.1 --set installCRDs=true
+```
+
+Create cluster issuer
+```bash
+kubectl apply -f .\cluster-issuer.yaml
+```
+
+Verify
+```bash
+kubectl get clusterissuers
+```
+
+Create certificate
+```bash
+kubectl apply -f .\certificate.yaml
+```
+
+Verify
+```bash
+kubectl get certificates
 ```
 
 Install
 ```bash
 helm install app .
 ```
+
+
+
 
 
 ## Resources:
