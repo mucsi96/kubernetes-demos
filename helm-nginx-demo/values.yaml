@@ -18,10 +18,9 @@ resources:
     cpu: 100m
 
 storage:
-  className: local-path
   accessMode: ReadWriteOnce
   capacity: 10Mi
   mountPath: /usr/share/nginx/html
-  hostPath: /shared/kubernetes-nginx-demo
+  hostPath: /shared/helm-nginx-demo
 
     

@@ -4,7 +4,7 @@ kind: PersistentVolume
 metadata:
   name: {{ $fullName }}
 spec:
-  storageClassName: {{ .Values.storage.className }}
+  storageClassName: {{ $fullName }}
   capacity:
     storage: {{ .Values.storage.capacity }}
   accessModes:

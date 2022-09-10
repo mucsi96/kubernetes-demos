@@ -27,7 +27,7 @@ curl -o /shared/helm-nginx-demo/index.html https://raw.githubusercontent.com/muc
 
 Install
 ```bash
-helm install
+helm install app .
 ```
 
 

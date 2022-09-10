@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - {{ .Values.storage.accessMode }}
-  storageClassName: {{ .Values.storage.className }}
+  storageClassName: {{ $fullName }}
   resources:
     requests:
       storage: {{ .Values.storage.capacity }}
