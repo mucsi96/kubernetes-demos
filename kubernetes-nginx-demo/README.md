@@ -34,6 +34,11 @@ Create service
 kubectl apply -f .\service.yaml 
 ```
 
+Create ingress
+```bash
+kubectl apply -f .\ingress.yaml 
+```
+
 Adding index.html on the server
 ```bash
 mkdir -p /shared/kubernetes-nginx-demo
