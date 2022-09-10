@@ -1,0 +1,17 @@
+{{- $fullName := include "helm-nginx-demo.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}-web
+spec:
+  entryPoints:
+    - web
+  routes:
+  - kind: Rule
+    match: Host(`{{ .Values.ingress.host }}`)
+    middlewares:
+    - name: {{ $fullName }}
+    services:
+    - name: {{ $fullName }}
+      port: {{ $svcPort }}

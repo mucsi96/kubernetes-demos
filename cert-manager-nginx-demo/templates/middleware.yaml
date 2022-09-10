@@ -1,0 +1,9 @@
+{{- $fullName := include "helm-nginx-demo.fullname" . -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ $fullName }}
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true

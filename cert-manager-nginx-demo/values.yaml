@@ -11,6 +11,8 @@ service:
 
 ingress:
   host: workout.ibari.ch
+  tls:
+    secretName: workout-ibari-ch-tls
 
 resources: 
   limits:
