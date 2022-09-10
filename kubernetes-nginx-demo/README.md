@@ -34,12 +34,20 @@ Create service
 kubectl apply -f .\service.yaml 
 ```
 
-Now you should be able to get 404 from Nginx from public.
-
 Adding index.html on the server
 ```bash
 mkdir -p /shared/kubernetes-nginx-demo
 curl -o /shared/kubernetes-nginx-demo/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/kubernetes-nginx-demo/src/index.html
+```
+
+Create persistent volume
+```bash
+kubectl apply -f .\persistent-volume.yaml
+```
+
+Create persistent volume claim
+```bash
+kubectl apply -f .\persistent-volume-claim.yaml
 ```
 
 

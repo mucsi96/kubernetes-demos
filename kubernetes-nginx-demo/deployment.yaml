@@ -19,5 +19,12 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        volumeMounts:
+          - mountPath: /usr/share/nginx/html
+            name: ssv
         ports:
         - containerPort: 80
+      volumes:
+        - name: ssv
+          persistentVolumeClaim:
+            claimName: nginx-demo-pvc
