@@ -24,6 +24,17 @@ Create namespace
 kubectl apply -f .\namespace.yaml
 ```
 
+Adding index.html on the server
+```bash
+mkdir -p /shared/kubernetes-nginx-demo
+curl -o /shared/kubernetes-nginx-demo/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/kubernetes-nginx-demo/src/index.html
+```
+
+Create persistent volume claim
+```bash
+kubectl apply -f .\persistent-volume-claim.yaml
+```
+
 Create deployment
 ```bash
 kubectl apply -f .\deployment.yaml
@@ -39,21 +50,7 @@ Create ingress
 kubectl apply -f .\ingress.yaml 
 ```
 
-Adding index.html on the server
-```bash
-mkdir -p /shared/kubernetes-nginx-demo
-curl -o /shared/kubernetes-nginx-demo/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/kubernetes-nginx-demo/src/index.html
-```
 
-Create persistent volume
-```bash
-kubectl apply -f .\persistent-volume.yaml
-```
-
-Create persistent volume claim
-```bash
-kubectl apply -f .\persistent-volume-claim.yaml
-```
 
 
 ## Resources:

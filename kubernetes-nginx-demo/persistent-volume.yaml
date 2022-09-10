@@ -7,6 +7,6 @@ spec:
   capacity:
     storage: 10Mi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   hostPath:
     path: '/shared/kubernetes-nginx-demo'

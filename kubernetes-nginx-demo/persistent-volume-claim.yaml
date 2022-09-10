@@ -4,9 +4,9 @@ metadata:
   name: nginx-demo-pvc
   namespace: nginx-demo
 spec:
-  storageClassName: manual
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+  storageClassName: manual
   resources:
     requests:
       storage: 10Mi
