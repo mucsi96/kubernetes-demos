@@ -25,6 +25,12 @@ mkdir -p /shared/cert-manager-nginx-demo
 curl -o /shared/cert-manager-nginx-demo/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/cert-manager-nginx-demo/src/index.html
 ```
 
+Confiure Traefik
+```bash
+mkdir -p /var/lib/rancher/k3s/server/manifests
+curl -o /var/lib/rancher/k3s/server/manifests/traefik-config.yaml https://raw.githubusercontent.com/mucsi96/vpsfiles/main/cert-manager-nginx-demo/traefik-config.yaml
+```
+
 
 Add the latest helm repository for the ingress-nginx
 ```bash
