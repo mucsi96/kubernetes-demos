@@ -1,0 +1,13 @@
+{{- $fullName := include "helm-nginx-demo.fullname" . -}}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ $fullName }}
+spec:
+  storageClassName: {{ .Values.storage.className }}
+  capacity:
+    storage: {{ .Values.storage.capacity }}
+  accessModes:
+    - {{ .Values.storage.accessMode }}
+  hostPath:
+    path: {{ .Values.storage.hostPath }}

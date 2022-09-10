@@ -1,0 +1,11 @@
+{{- $fullName := include "helm-nginx-demo.fullname" . -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $fullName }}
+spec:
+  selector:
+    {{- include "helm-nginx-demo.selectorLabels" . | nindent 4 }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
