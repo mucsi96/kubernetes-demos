@@ -1,0 +1,4 @@
+- fix http -> https in cert manager example
+- ssl (cluser-issuer, certificate, http -> https) with help package and cert-manager as dependency
+- vault-store + 
+- Spring Boot REST + html UI + mysql
