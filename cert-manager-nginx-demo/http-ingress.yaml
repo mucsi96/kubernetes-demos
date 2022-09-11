@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-http
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: default-http-to-https@kubernetescrd
+spec:
+  rules:
+   - host: workout.ibari.ch
+     http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: app-helm-nginx-demo
+              port:
+                number: 80
