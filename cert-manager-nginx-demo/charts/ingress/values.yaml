@@ -4,5 +4,5 @@ tls:
   issuerName: ssl
 application:
   service: 
-    name: cert-manager-nginx-demo
+    name: app
     port: 80
