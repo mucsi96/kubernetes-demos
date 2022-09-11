@@ -5,6 +5,7 @@ metadata:
   name: {{ $fullName }}-https
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-{{ $fullName }}-ratelimit@kubernetescrd
 spec:
   rules:
    - host: {{ .Values.hostName }}
