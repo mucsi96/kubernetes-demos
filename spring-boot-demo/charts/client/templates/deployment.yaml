@@ -21,12 +21,5 @@ spec:
           limits:
             memory: {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
-        volumeMounts:
-          - mountPath: {{ .Values.storage.mountPath }}
-            name: ssv
         ports:
         - containerPort: 80
-      volumes:
-        - name: ssv
-          persistentVolumeClaim:
-            claimName: {{ $fullName }}

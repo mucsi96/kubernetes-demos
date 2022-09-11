@@ -10,6 +10,11 @@
 <script>
     async function loadMessage() {
         const response = await fetch('/api/message');
+
+        if (!response.ok) {
+            throw new Error('Server error:', response.statusText);
+        }
+
         const message = await response.text();
         return message;
     }

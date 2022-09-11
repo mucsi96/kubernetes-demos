@@ -14,8 +14,8 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: {{ .Release.Name }}-{{ .Values.application.service.name }}
+              name: {{ .Release.Name }}-{{ .Values.application.clientService.name }}
               port:
-                number: {{ .Values.application.service.port }}
+                number: {{ .Values.application.clientService.port }}
   tls:
   - secretName: {{ .Values.tls.secretName }}

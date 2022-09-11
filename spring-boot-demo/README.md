@@ -19,12 +19,6 @@ Get cluster nodes from your local machine.
 kubectl get nodes
 ```
 
-Adding index.html on the server
-```bash
-mkdir -p /shared/spring-boot-demo
-curl -o /shared/spring-boot-demo/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/spring-boot-demo/src/index.html
-```
-
 Add the latest helm repository for the ingress-nginx
 ```bash
 helm repo add jetstack https://charts.jetstack.io

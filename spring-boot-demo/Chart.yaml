@@ -23,6 +23,6 @@ version: 0.1.1
 # It is recommended to use it with quotes.
 appVersion: "1.23.1"
 dependencies:
-  - name: app
+  - name: client
   - name: ingress
   - name: ssl

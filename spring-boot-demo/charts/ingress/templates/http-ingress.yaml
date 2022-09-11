@@ -9,12 +9,3 @@ metadata:
 spec:
   rules:
    - host: {{ .Values.hostName }}
-     http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: {{ .Release.Name }}-{{ .Values.application.service.name }}
-              port:
-                number: {{ .Values.application.service.port }}

@@ -3,6 +3,6 @@ tls:
   secretName: tls-secret
   issuerName: ssl
 application:
-  service: 
-    name: app
+  clientService: 
+    name: client
     port: 80
