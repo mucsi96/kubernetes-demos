@@ -8,15 +8,15 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-{{ $fullName }}-ratelimit@kubernetescrd
 spec:
   rules:
-   - host: {{ .Values.hostName }}
+   - host: {{ .Values.global.hostName }}
      http:
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: {{ .Release.Name }}-{{ .Values.application.clientService.name }}
+              name: {{ .Release.Name }}-{{ .Values.global.services.client.name }}
               port:
-                number: {{ .Values.application.clientService.port }}
+                number: {{ .Values.global.services.client.port }}
   tls:
-  - secretName: {{ .Values.tls.secretName }}
+  - secretName: {{ .Values.global.services.ssl.secretName }}

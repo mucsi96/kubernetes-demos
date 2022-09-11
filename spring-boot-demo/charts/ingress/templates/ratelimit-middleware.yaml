@@ -5,5 +5,5 @@ metadata:
   name: {{ $fullName }}-ratelimit
 spec:
   rateLimit:
-    average: 10
-    burst: 20
+    average: {{ .Values.rateLimit.average }}
+    burst: {{ .Values.rateLimit.burst }}

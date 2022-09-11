@@ -1,0 +1,10 @@
+global:
+  hostName: workout.ibari.ch
+  email: mucsi96@gmail.com
+  services:
+    client:
+      name: client
+      port: 80
+    ssl:
+      name: ssl
+      secretName: tls-secret

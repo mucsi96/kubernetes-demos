@@ -4,9 +4,9 @@ kind: Certificate
 metadata:
   name: {{ $fullName }}
 spec:
-  secretName: {{ .Values.issuer.secretName }}
+  secretName: {{ .Values.global.services.ssl.secretName }}
   issuerRef:
-    name: {{ $fullName }}
+    name: {{ .Release.Name }}-{{ .Values.global.services.ssl.name }}
     kind: ClusterIssuer
   dnsNames:
-    - {{ .Values.issuer.dnsName }}
+    - {{ .Values.global.hostName }}

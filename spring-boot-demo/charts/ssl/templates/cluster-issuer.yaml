@@ -2,13 +2,13 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: {{ $fullName }}
+  name: {{ .Release.Name }}-{{ .Values.global.services.ssl.name }}
 spec:
   acme:
     server: {{ .Values.issuer.server }}
-    email: {{ .Values.issuer.email }}
+    email: {{ .Values.global.email }}
     privateKeySecretRef:
-      name: {{ .Values.issuer.secretName }}
+      name: {{ .Values.global.services.ssl.secretName }}
     solvers:
     - http01:
         ingress:
