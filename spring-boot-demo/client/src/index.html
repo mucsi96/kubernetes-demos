@@ -12,7 +12,7 @@
         const response = await fetch('/api/message');
 
         if (!response.ok) {
-            throw new Error('Server error:', response.statusText);
+            throw new Error('Server error:', response.status);
         }
 
         const message = await response.text();
