@@ -1,0 +1,21 @@
+{{- $fullName := include "ingress.fullname" . -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-https
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  rules:
+   - host: {{ .Values.hostName }}
+     http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Release.Name }}-{{ .Values.application.service.name }}
+              port:
+                number: {{ .Values.application.service.port }}
+  tls:
+  - secretName: {{ .Values.tls.secretName }}

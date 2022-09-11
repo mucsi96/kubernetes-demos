@@ -1,0 +1,23 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+service:
+  port: 80
+
+resources: 
+  limits:
+    memory: 128Mi
+    cpu: 100m
+
+storage:
+  accessMode: ReadWriteOnce
+  capacity: 10Mi
+  mountPath: /usr/share/nginx/html
+  hostPath: /shared/spring-boot-demo
+
+    
