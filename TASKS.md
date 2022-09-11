@@ -1,4 +1,3 @@
-- ssl (cluser-issuer, certificate, http -> https) with help package and cert-manager as dependency
 - add rate limiting on ingress level
 - vault-store + helm-secrets  https://itnext.io/helm-3-secrets-management-4f23041f05c3
 - Spring Boot REST + html UI + mysql

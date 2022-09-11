@@ -1,0 +1,12 @@
+{{- $fullName := include "ssl.fullname" . -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ $fullName }}
+spec:
+  secretName: {{ .Values.issuer.secretName }}
+  issuerRef:
+    name: {{ $fullName }}
+    kind: ClusterIssuer
+  dnsNames:
+    - {{ .Values.issuer.dnsName }}

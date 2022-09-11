@@ -1,0 +1,5 @@
+issuer:
+  server: https://acme-v02.api.letsencrypt.org/directory
+  email: mucsi96@gmail.com
+  secretName: tls-secret
+  dnsName: workout.ibari.ch

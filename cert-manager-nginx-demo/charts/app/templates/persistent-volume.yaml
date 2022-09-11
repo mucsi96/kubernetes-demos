@@ -1,4 +1,4 @@
-{{- $fullName := include "helm-nginx-demo.fullname" . -}}
+{{- $fullName := include "app.fullname" . -}}
 apiVersion: v1
 kind: PersistentVolume
 metadata:

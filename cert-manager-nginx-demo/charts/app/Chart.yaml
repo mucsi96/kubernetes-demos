@@ -1,6 +1,6 @@
 apiVersion: v2
-name: app-parent
-description: Parent chart for Nginx app
+name: app
+description: Chart for Nginx app
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -22,7 +22,3 @@ version: 0.1.1
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.23.1"
-dependencies:
-  - name: app
-  - name: ingress
-  - name: ssl

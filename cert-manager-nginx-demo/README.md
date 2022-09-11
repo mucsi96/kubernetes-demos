@@ -25,13 +25,6 @@ mkdir -p /shared/cert-manager-nginx-demo
 curl -o /shared/cert-manager-nginx-demo/index.html https://raw.githubusercontent.com/mucsi96/vpsfiles/main/cert-manager-nginx-demo/src/index.html
 ```
 
-Confiure Traefik
-```bash
-mkdir -p /var/lib/rancher/k3s/server/manifests
-curl -o /var/lib/rancher/k3s/server/manifests/traefik-config.yaml https://raw.githubusercontent.com/mucsi96/vpsfiles/main/cert-manager-nginx-demo/traefik-config.yaml
-```
-
-
 Add the latest helm repository for the ingress-nginx
 ```bash
 helm repo add jetstack https://charts.jetstack.io
@@ -47,34 +40,10 @@ Install `cert-manager`
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.9.1 --set installCRDs=true
 ```
 
-Create cluster issuer
+Install app
 ```bash
-kubectl apply -f .\cluster-issuer.yaml
+helm install cert-manager-nginx-demo .
 ```
-
-Verify
-```bash
-kubectl get clusterissuers
-```
-
-Create certificate
-```bash
-kubectl apply -f .\certificate.yaml
-```
-
-Verify
-```bash
-kubectl get certificates
-```
-
-Install
-```bash
-helm install app .
-```
-
-
-
-
 
 ## Resources:
 

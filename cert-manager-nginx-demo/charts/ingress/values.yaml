@@ -1,0 +1,8 @@
+hostName: workout.ibari.ch
+tls:
+  secretName: tls-secret
+  issuerName: ssl
+application:
+  service: 
+    name: cert-manager-nginx-demo
+    port: 80

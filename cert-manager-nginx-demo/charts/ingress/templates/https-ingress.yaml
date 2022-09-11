@@ -1,20 +1,21 @@
+{{- $fullName := include "ingress.fullname" . -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-https
+  name: {{ $fullName }}-https
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   rules:
-   - host: workout.ibari.ch
+   - host: {{ .Values.hostName }}
      http:
       paths:
         - path: /
           pathType: Prefix
           backend:
             service:
-              name: app-helm-nginx-demo
+              name: {{ .Values.application.service.name }}
               port:
-                number: 80
+                number: {{ .Values.application.service.port }}
   tls:
-  - secretName: workout-ibari-ch-tls
+  - secretName: {{ .Values.tls.secretName }}
