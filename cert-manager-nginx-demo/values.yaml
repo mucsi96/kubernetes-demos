@@ -9,11 +9,6 @@ image:
 service:
   port: 80
 
-ingress:
-  host: workout.ibari.ch
-  tls:
-    secretName: workout-ibari-ch-tls
-
 resources: 
   limits:
     memory: 128Mi
