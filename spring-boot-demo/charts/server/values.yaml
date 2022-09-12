@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: mucsi96/spring-boot-demo-server
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+resources: 
+  limits:
+    memory: 128Mi
+    cpu: 100m
+
+    

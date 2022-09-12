@@ -1,0 +1,9 @@
+{{- $fullName := include "ingress.fullname" . -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ $fullName }}-api-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /api

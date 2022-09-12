@@ -1,2 +1,3 @@
 - vault-store + helm-secrets  https://itnext.io/helm-3-secrets-management-4f23041f05c3
 - Spring Boot REST + html UI + mysql
+- build docker images and deploye helm template with terraform as part of CI pipeline

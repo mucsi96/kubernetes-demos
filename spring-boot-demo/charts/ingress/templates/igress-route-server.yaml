@@ -1,0 +1,20 @@
+{{- $fullName := include "ingress.fullname" . -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}-server
+spec:
+  entryPoints: 
+    - websecure
+  routes:
+  - kind: Rule
+    match: Host(`{{ .Values.global.hostName }}`) && PathPrefix(`/api`)
+    middlewares:
+    - name: {{ $fullName }}-ratelimit
+    - name: {{ $fullName }}-api-stripprefix
+    services:
+    - kind: Service
+      name: {{ .Release.Name }}-{{ .Values.global.services.server.name }}
+      port: {{ .Values.global.services.server.port }}
+  tls:
+    secretName: {{ .Values.global.services.ssl.secretName }}

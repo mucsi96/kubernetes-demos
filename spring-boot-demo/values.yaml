@@ -5,6 +5,9 @@ global:
     client:
       name: client
       port: 80
+    server:
+      name: server
+      port: 8080
     ssl:
       name: ssl
       secretName: tls-secret
