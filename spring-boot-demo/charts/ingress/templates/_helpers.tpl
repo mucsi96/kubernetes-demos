@@ -60,3 +60,12 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "ingress.commonMiddlewares" -}}
+- name: {{ include "ingress.fullname" . }}-ratelimit
+{{- end }}
+
+{{- define "ingress.tls" -}}
+tls:
+  secretName: {{ .Values.global.services.ssl.secretName }}
+{{- end }}

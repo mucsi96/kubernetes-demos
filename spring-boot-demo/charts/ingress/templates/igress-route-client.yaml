@@ -10,10 +10,9 @@ spec:
   - kind: Rule
     match: Host(`{{ .Values.global.hostName }}`) && PathPrefix(`/`)
     middlewares:
-    - name: {{ $fullName }}-ratelimit
+    {{- include "ingress.commonMiddlewares" . | nindent 4 }}
     services:
     - kind: Service
       name: {{ .Release.Name }}-{{ .Values.global.services.client.name }}
       port: {{ .Values.global.services.client.port }}
-  tls:
-    secretName: {{ .Values.global.services.ssl.secretName }}
+  {{- include "ingress.tls" . | nindent 2 }}
