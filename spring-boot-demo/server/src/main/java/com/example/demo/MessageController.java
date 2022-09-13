@@ -1,21 +1,16 @@
 package com.example.demo;
 
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class MessageController {
-    private final String message;
-
-    MessageController(
-            @Value("#{environment.MESSAGE}") String message
-    ) {
-        this.message = message;
-    }
+    private final MessageConfiguration messageConfiguration;
 
     @GetMapping("/message")
     public String getMessage() {
-        return this.message;
+        return messageConfiguration.getMessage();
     }
 }

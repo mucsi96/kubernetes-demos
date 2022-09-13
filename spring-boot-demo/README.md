@@ -36,16 +36,23 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --creat
 helm install sealed-secrets --namespace kube-system --set-string fullnameOverride=sealed-secrets-controller sealed-secrets/sealed-secrets
 ```
 
+Install app
+```bash
+helm install spring-boot-demo .
+```
+
+Upgrade app
+```bash
+helm upgrade spring-boot-demo .
+```
+
+## Creating secrets
+
 Install `kubeseal` from [https://github.com/bitnami-labs/sealed-secrets/releases](latest releases)
 
 Create `SealedSecrets`
 ```
 echo -n foo | kubeseal --raw --scope cluster-wide
-```
-
-Install app
-```bash
-helm install spring-boot-demo .
 ```
 
 ## Resources:
