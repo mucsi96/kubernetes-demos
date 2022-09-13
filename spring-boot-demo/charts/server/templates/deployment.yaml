@@ -23,3 +23,10 @@ spec:
             cpu: {{ .Values.resources.limits.cpu }}
         ports:
         - containerPort: {{ .Values.global.services.server.port }}
+        env:
+          - name: MESSAGE
+            valueFrom:
+              secretKeyRef:
+                name: {{ $fullName }}
+                key: message
+                optional: false
