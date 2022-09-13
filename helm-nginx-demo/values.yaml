@@ -10,7 +10,7 @@ service:
   port: 80
 
 ingress:
-  host: workout.ibari.ch
+  host: demo.ibari.ch
 
 resources: 
   limits:

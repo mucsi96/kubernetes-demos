@@ -6,7 +6,7 @@ metadata:
     name: nginx-demo-ingress
 spec:
   rules:
-  - host: workout.ibari.ch
+  - host: demo.ibari.ch
     http:
       paths:
       - pathType: Prefix

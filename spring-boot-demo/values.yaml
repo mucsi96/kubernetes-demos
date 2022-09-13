@@ -1,5 +1,5 @@
 global:
-  hostName: workout.ibari.ch
+  hostName: demo.ibari.ch
   email: mucsi96@gmail.com
   services:
     client:

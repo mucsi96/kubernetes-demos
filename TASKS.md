@@ -1,4 +1,8 @@
-- vault-store + helm-secrets  https://itnext.io/helm-3-secrets-management-4f23041f05c3
+- use Sealed Secrets. https://docs.bitnami.com/tutorials/sealed-secrets
 - Spring Boot REST + html UI + mysql
 - build docker images and deploye helm template with terraform as part of CI pipeline
 - add scheduled backups from db to s3 (mysqldumb)
+- add metrics https://k3s.rocks/metrics/
+- add logging https://grafana.com/blog/2022/04/26/set-up-and-observe-a-spring-boot-application-with-grafana-cloud-prometheus-and-opentelemetry/
+- add script to open Traefik Dashboard https://k3s.rocks/traefik-dashboard/ https://doc.traefik.io/traefik/operations/dashboard/
+- add helm tests

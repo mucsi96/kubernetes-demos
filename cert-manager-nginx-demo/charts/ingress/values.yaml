@@ -1,4 +1,4 @@
-hostName: workout.ibari.ch
+hostName: demo.ibari.ch
 tls:
   secretName: tls-secret
   issuerName: ssl
