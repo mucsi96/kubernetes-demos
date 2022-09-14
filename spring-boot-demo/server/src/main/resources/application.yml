@@ -1,2 +1,14 @@
 app:
   message: ${env.MESSAGE}
+server:
+  shutdown: graceful
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+  health:
+    probes:
+      enabled: true

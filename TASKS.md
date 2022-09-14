@@ -1,4 +1,3 @@
-- use Sealed Secrets. https://docs.bitnami.com/tutorials/sealed-secrets
 - add health check to server
 - Spring Boot REST + html UI + mysql
 - build docker images and deploye helm template with terraform as part of CI pipeline
