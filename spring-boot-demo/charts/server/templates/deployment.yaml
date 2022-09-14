@@ -45,7 +45,7 @@ spec:
         startupProbe:
             httpGet:
               path: /actuator/health/liveness
-              port: 8080
+              port: {{ .Values.global.services.server.port }}
             failureThreshold: 30
             periodSeconds: 10
         lifecycle:
