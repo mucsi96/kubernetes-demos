@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.config.MessageConfig;
+import com.example.demo.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class MessageController {
-    private final MessageConfiguration messageConfiguration;
+    private final MessageRepository messageRepository;
 
     @GetMapping("/message")
     public String getMessage() {
-        return messageConfiguration.getMessage();
+        return messageRepository.findAll().get(0).getContent();
     }
 }
