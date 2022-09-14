@@ -34,10 +34,20 @@ spec:
           httpGet:
             path: /actuator/health/liveness
             port: {{ .Values.global.services.server.port }}
+          initialDelaySeconds: 15
+          periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /actuator/health/readiness
             port: {{ .Values.global.services.server.port }}
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
         lifecycle:
           preStop:
             exec:
