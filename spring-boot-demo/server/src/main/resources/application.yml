@@ -14,7 +14,8 @@ management:
       enabled: true
 spring:
   datasource:
-    url: jdbc:mysql://${env.MYSQL_HOST}:${env.MYSQL_PORT}/${env.MYSQL_DATABASE}?createDatabaseIfNotExist=true&useSSL=false
+    url: jdbc:mysql://${env.MYSQL_HOST}:${env.MYSQL_PORT}/${env.MYSQL_DATABASE}?createDatabaseIfNotExist=true
+#    url: jdbc:mysql://${env.MYSQL_HOST}:${env.MYSQL_PORT}/${env.MYSQL_DATABASE}?createDatabaseIfNotExist=true&useSSL=false
     username: ${env.MYSQL_USER}
     password: ${env.MYSQL_PASSWORD}
   jpa:
