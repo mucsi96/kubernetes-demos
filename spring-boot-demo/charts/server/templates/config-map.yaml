@@ -1,0 +1,7 @@
+{{- $fullName := include "app.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}
+data:
+  message: {{ .Values.config.message }}

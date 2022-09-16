@@ -8,7 +8,7 @@ spec:
     server: {{ .Values.issuer.server }}
     email: {{ .Values.global.email }}
     privateKeySecretRef:
-      name: {{ .Values.global.services.ssl.secretName }}
+      name: {{ .Release.Name }}-{{ .Values.global.services.ssl.name }}
     solvers:
     - http01:
         ingress:

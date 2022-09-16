@@ -22,13 +22,13 @@ spec:
             memory: {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
         ports:
-        - containerPort: {{ .Values.global.services.server.port }}
+        - containerPort: {{ .Values.global.services.database.port }}
         env:
-          - name: MESSAGE
+          - name: MYSQL_ROOT_PASSWORD
             valueFrom:
-              configMapKeyRef:
-                name: {{ $fullName }}
-                key: message
+              secretKeyRef:
+                name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
+                key: rootPassword
                 optional: false
           - name: MYSQL_DATABASE
             valueFrom:
@@ -36,10 +36,6 @@ spec:
                 name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
                 key: databaseName
                 optional: false
-          - name: MYSQL_HOST
-            value: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
-          - name: MYSQL_PORT
-            value: {{ .Values.global.services.database.port | quote }}
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
@@ -52,25 +48,3 @@ spec:
                 name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
                 key: password
                 optional: false
-        livenessProbe:
-          httpGet:
-            path: /actuator/health/liveness
-            port: {{ .Values.global.services.server.port }}
-          initialDelaySeconds: 15
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /actuator/health/readiness
-            port: {{ .Values.global.services.server.port }}
-          initialDelaySeconds: 15
-          periodSeconds: 10
-        startupProbe:
-          httpGet:
-            path: /actuator/health/liveness
-            port: {{ .Values.global.services.server.port }}
-          failureThreshold: 30
-          periodSeconds: 10
-        lifecycle:
-          preStop:
-            exec:
-              command: ["sh", "-c", "sleep 10"]

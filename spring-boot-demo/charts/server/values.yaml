@@ -9,6 +9,7 @@ image:
 resources: 
   limits:
     memory: 128Mi
-    cpu: 100m
+    cpu: 500m
 
-    
+config:
+  message: Hello from Spring Boot Demo!

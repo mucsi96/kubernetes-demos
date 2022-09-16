@@ -10,6 +10,6 @@ global:
       port: 8080
     ssl:
       name: ssl
-      secretName: tls-secret
-  secrets:
-    message: AgCdNXT+nPoKra/dw3ucTozl/b+4GFCMGtye9T2ZXQ0cNAzQsBWbacnxWr+FGuYverdIn+/VyBm58kWqgk3HZsGJxZ0bIo4ygh1vAeG3zm7YcmLjcjU74EW1QhTuPF2neptyfuSOL9N+XVpo5c/SL8BE6rF/jneRf8kDsez+B025ehO+BAvZigqx79e7aUi0lBBBWAgBeWibZ/r553eQIpugxFcVlSv0GQTPXjdroQYgFiDcm82P2HkNdHsTPaXd3xI6gtiIptN39PP/jyu5/g4CR330jKOMiGbrg4HBuSDVHRYAzz+9Lc/ygKWsZJQ8Z6+0L4WD8HlKnS8Ot5lz1z/5lGSK7gx+QOr8B0CC2rZb5F8LJ+dvWH/vPVpKwdcGavD8E5at9QsHI0Z+jYf3rfarD7aXtEl2ido7CtNP68oooVCWzLLbDY8waqF9OcIhauzIBiGvJ+V+DKIdtDNcv8lENKqvJ3eCujAUcpcEwW/1C7K9TDRG5p+Y4iOCxHVeWWvVbw6vF2PQgOWmqdiWPwsLAiKwazsWUMz80DWKaezlSEX0JcmBRGLhbvhiaMduh4hlY3jDJvHZWfe8pisQCgluGCy5xlQT0ovvrhbO1NrxW9XV4Wz6dKBP8bLI7EPbK4NNTHd+ppQ/B2SWeK4HtlEs5x/xG538b7FoKq2zvpdBjr5Bvsy/YQV/LNndOBLw9hLCWUoWb8PerQvBchjNYRlaJT2XSXN/J0VWZojTbfo=
+    database:
+      name: database
+      port: 8080

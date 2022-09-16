@@ -4,7 +4,7 @@ kind: Certificate
 metadata:
   name: {{ $fullName }}
 spec:
-  secretName: {{ .Values.global.services.ssl.secretName }}
+  secretName: {{ .Release.Name }}-{{ .Values.global.services.ssl.name }}
   issuerRef:
     name: {{ .Release.Name }}-{{ .Values.global.services.ssl.name }}
     kind: ClusterIssuer
