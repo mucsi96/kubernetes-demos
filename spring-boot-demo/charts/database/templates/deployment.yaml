@@ -48,3 +48,10 @@ spec:
                 name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
                 key: password
                 optional: false
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: ssv
+      volumes:
+      - name: ssv
+        persistentVolumeClaim:
+          claimName: {{ $fullName }}
