@@ -7,9 +7,12 @@ image:
   tag: "latest"
 
 resources: 
+  requests:
+    memory: 900Mi
+    cpu: 700m
   limits:
-    memory: 128Mi
-    cpu: 500m
+    memory: 900Mi
+    cpu: 700m
 
 config:
   message: Hello from Spring Boot Demo!

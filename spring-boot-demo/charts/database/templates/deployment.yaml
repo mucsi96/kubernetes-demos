@@ -18,6 +18,9 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
           limits:
             memory: {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
@@ -29,25 +32,21 @@ spec:
               secretKeyRef:
                 name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
                 key: rootPassword
-                optional: false
           - name: MYSQL_DATABASE
             valueFrom:
               configMapKeyRef:
                 name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
                 key: databaseName
-                optional: false
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
                 name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
                 key: userName
-                optional: false
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
                 key: password
-                optional: false
         volumeMounts:
           - mountPath: /var/lib/mysql
             name: ssv
