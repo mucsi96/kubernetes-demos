@@ -31,7 +31,7 @@ helm upgrade spring-boot-demo .
 
 Install `kubeseal` from [https://github.com/bitnami-labs/sealed-secrets/releases](latest releases)
 
-Create `SealedSecrets`
+Create `SealedSecrets` in Linux or gitbash
 ```
 echo -n foo | kubeseal --raw --scope cluster-wide
 ```
