@@ -12,4 +12,4 @@ global:
       name: ssl
     database:
       name: database
-      port: 8080
+      port: 3306
