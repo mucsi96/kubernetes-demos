@@ -8,11 +8,11 @@ image:
 
 resources:
   requests:
-    memory: 900Mi
-    cpu: 700m
+    memory: 500Mi
+    cpu: 500m
   limits:
-    memory: 900Mi
-    cpu: 700m
+    memory: 1Gi
+    cpu: 1000m
 
 secrets:
   rootPassword: AgAwRhwa2K6F0aeaND1rfR8JqnBq3/adpSrpwNe/ZUuM8eom1h1eZm+Nloov2UVK/haUK9QYGBZUkwY4RLSOMiuiegBkn3afdPXKUHaccvvCiQneBNnR6KgMLzrF0QuuqtXNcGB2Uz3jS31KeYhjNdHa0DW11Y1LZeSCAWoQk2Hvlju/4OVEy76set21oOBTe7AV6rYPh/nPvL5H8TU36isCuPvDr1p8sUz+cEXr97iKubv/bduWV/z2ZgYQA+QlpBEDhWf448ijL+dENnI1QaUydfmRYFa6EaFYrPgmv06EWzQrLc0xxpxryrhSv/rprSR3Cw/ugdC3qCcpNZuDgAYRDH6wyHqRuUrWiU/DirNof+qooVf4rd0kFvBjLVmPyFa5FczHyyMrk0Bw5QFxFCr7/hJcpPMRpb1O9UqMPRsyUVqNawFuufE7mDjqcmTon0pfl+04gLKSr+aA+vgtJuc2RIZxENc7tP9QQMhWBz07SNwIEFcgRqMg6T8B2OM1iqRJF3k2354weoCecPhMmAqEKfbCMG70nba1heUoQMICRMLdbqQRaB6wkTcTAHoqVqiSbuSTgDP8++Ibfk/VmChWEb5/L1KKazNWGwjbZT+8c8Aq8hoQdSecLvFu2zXJJNdN0Php2/ANmztnk+85eayO0gle8Js4YMTJsR8Ew9PLkIIn6aQrL2MpHORO2BgmNYrGvcEuhQ6pzzGVcFr3LgQp
