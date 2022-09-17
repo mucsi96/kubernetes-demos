@@ -13,4 +13,14 @@ resource "docker_image" "client" {
 
 resource "docker_registry_image" "client" {
   name = "spring-boot-demo-client:latest"
+
+  build {
+    context = abspath("../client")
+
+    auth_config {
+      host_name = "registry.hub.docker.com"
+      user_name = var.dockerUsername
+      auth = var.dockerAccessToken
+    }
+  }
 }
