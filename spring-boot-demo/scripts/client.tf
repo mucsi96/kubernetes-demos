@@ -5,7 +5,7 @@ resource "null_resource" "docker_build" {
     }
 
     provisioner "local-exec" {
-        command = "docker build -t spring-boot-demo-client:latest -t spring-boot-demo-client:${var.runNumber} ../client"
+        command = "docker build -t ${var.dockerUsername}/spring-boot-demo-client:latest -t ${var.dockerUsername}/spring-boot-demo-client:${var.runNumber} ../client"
     }
 }
 
@@ -31,6 +31,6 @@ resource "null_resource" "docker_push" {
     }
 
     provisioner "local-exec" {
-        command = "docker push spring-boot-demo-client"
+        command = "docker push ${var.dockerUsername}/spring-boot-demo-client"
     }
 }
