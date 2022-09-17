@@ -28,4 +28,4 @@ dependencies:
   - name: client
   - name: ingress
   - name: ssl
-  - name: kubernetes-dashboard
+  - name: demo-kubernetes-dashboard
