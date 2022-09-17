@@ -9,5 +9,5 @@ data "kubernetes_resource" "example" {
 }
 
 output "test" {
-  value = data.kubernetes_resource.example.object.data
+  value = data.kubernetes_resource.example.object
 }
