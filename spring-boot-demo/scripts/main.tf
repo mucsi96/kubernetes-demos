@@ -11,10 +11,16 @@ resource "docker_image" "client" {
   }
 }
 
-resource "docker_registry_image" "client" {
-  name = "spring-boot-demo-client:latest"
+resource "null_resource" "docker_push" {
+  depends_on = [
+    docker_image.client
+  ]
 
-  build {
-    context = abspath("../client")
+  triggers = {
+    always_run = timestamp()
+  }
+
+  provisioner "local-exec" {
+    command = "docker push spring-boot-demo-client:latest"
   }
 }
