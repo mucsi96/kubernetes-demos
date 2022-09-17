@@ -11,10 +11,10 @@ resource "docker_image" "client" {
   }
 }
 
-resource "docker_registry_image" "client" {
-  name = "spring-boot-demo-client:latest"
+# resource "docker_registry_image" "client" {
+#   name = "spring-boot-demo-client:latest"
 
-  build {
-    context = abspath("../client")
-  }
-}
+#   build {
+#     context = abspath("../client")
+#   }
+# }
