@@ -1,4 +1,4 @@
-resource "docker_registry_image" "client" {
+resource "docker_image" "client" {
   name = "spring-boot-demo-client:latest"
 
   build {
@@ -9,4 +9,8 @@ resource "docker_registry_image" "client" {
   triggers = {
     always_run = timestamp()
   }
+}
+
+resource "docker_registry_image" "client" {
+  name = "spring-boot-demo-client:latest"
 }
