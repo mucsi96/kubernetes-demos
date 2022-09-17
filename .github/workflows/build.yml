@@ -23,8 +23,6 @@ jobs:
       - run: terraform init
       - run: |
             terraform apply -auto-approve -input=false \
-              -var 'dockerUsername=${{ secrets.DOCKER_HUB_USERNAME }}' \
-              -var 'dockerAccessToken=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}' \
               -var 'runNumber=${{ github.run_number }}'
       # -
       #   name: Login to Docker Hub
