@@ -4,8 +4,8 @@ resource "docker_image" "client" {
     path = "../client"
     tag  = ["spring-boot-demo-client:${var.runNumber}"]
   }
-}
-
-output "runNumber" {
-  value = var.runNumber
+  triggers = {
+    always_run = timestamp()
+    # dir_sha1 = sha1(join("", [for f in fileset(path.module, "../client/**") : filesha1(f)]))
+  }
 }
