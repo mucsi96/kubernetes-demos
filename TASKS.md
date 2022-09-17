@@ -1,4 +1,3 @@
-- Spring Boot REST + html UI + mysql
 - build docker images and deploye helm template with terraform as part of CI pipeline
 - add scheduled backups from db to s3 (mysqldumb)
 - add metrics https://k3s.rocks/metrics/
