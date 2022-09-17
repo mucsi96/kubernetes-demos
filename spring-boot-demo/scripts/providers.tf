@@ -10,6 +10,6 @@ terraform {
 provider "docker" {
   registry_auth {
     address     = "registry-1.docker.io"
-    config_file = "docker-config.json"
+    config_file = pathexpand("~/.docker/config.json")
   }
 }

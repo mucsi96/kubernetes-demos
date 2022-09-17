@@ -19,6 +19,7 @@ jobs:
       - run: terraform fmt
       - run: git diff
       - run: terraform fmt -check
+      - run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - run: terraform init
       - run: |
             terraform apply -auto-approve -input=false \
