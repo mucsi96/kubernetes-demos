@@ -11,6 +11,6 @@ provider "docker" {
   registry_auth {
     address  = "registry-1.docker.io"
     username = var.dockerUsername
-    password = var.dockerAccessToken
+    password = split(":", base64decode(var.dockerAccessToken))[1]
   }
 }
