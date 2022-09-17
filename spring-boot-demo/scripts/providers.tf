@@ -10,6 +10,6 @@ terraform {
 provider "docker" {
   registry_auth {
     address             = "registry-1.docker.io"
-    config_file_content = "{\"auths\":{\"registry-1.docker.io\":{\"auth\":\"${var.dockerAccessToken}\"}}}"
+    config_file_content = "{\"auths\":{\"https://index.docker.io/v1/\":{\"username\":\"${var.dockerUsername}\",\"auth\":\"${var.dockerAccessToken}\"}}}"
   }
 }
