@@ -40,11 +40,11 @@ locals {
 # }
 
 resource "docker_image" "client" {
-  name = "${local.image_name}:latest"
+  name = "${local.image_name}:${var.runNumber}"
 
   build {
     path = "../client"
-    tag  = ["${local.image_name}:${var.runNumber}"]
+    tag  = ["${local.image_name}:latest"]
   }
 
   triggers = {
@@ -53,7 +53,7 @@ resource "docker_image" "client" {
 }
 
 resource "docker_registry_image" "client" {
-  name = "${local.image_name}:latest"
+  name = "${local.image_name}:${var.runNumber}"
 
   build {
     context = abspath("../client")
