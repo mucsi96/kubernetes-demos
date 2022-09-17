@@ -9,7 +9,7 @@ terraform {
 
 provider "docker" {
   registry_auth {
-    address     = "registry-1.docker.io"
-    config_file = "{'auths':{'registry-1.docker.io':{'auth': '${var.dockerAccessToken}'}}}"
+    address             = "registry-1.docker.io"
+    config_file_content = "{'auths':{'registry-1.docker.io':{'auth': '${var.dockerAccessToken}'}}}"
   }
 }
