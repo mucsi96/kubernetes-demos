@@ -16,7 +16,8 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
-      - run: terraform fmt -check
+      - run: terraform fmt
+      - run: git diff
       - run: terraform init
       - run: |
             terraform apply -auto-approve -input=false \
