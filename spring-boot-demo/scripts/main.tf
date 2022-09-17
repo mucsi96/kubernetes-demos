@@ -16,11 +16,5 @@ resource "docker_registry_image" "client" {
 
   build {
     context = abspath("../client")
-
-    auth_config {
-      host_name = "registry.hub.docker.com"
-      user_name = var.dockerUsername
-      auth = var.dockerAccessToken
-    }
   }
 }
