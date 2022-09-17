@@ -7,4 +7,10 @@ terraform {
   }
 }
 
-provider "docker" {}
+provider "docker" {
+  registry_auth {
+    address  = "registry.hub.docker.com"
+    user_name = var.dockerUsername
+    auth = var.dockerAccessToken
+  }
+}

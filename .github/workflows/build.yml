@@ -18,6 +18,7 @@ jobs:
           terraform_wrapper: false
       - run: terraform fmt
       - run: git diff
+      - run: terraform fmt -check
       - run: terraform init
       - run: |
             terraform apply -auto-approve -input=false \
