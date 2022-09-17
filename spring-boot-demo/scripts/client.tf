@@ -1,36 +1,61 @@
-resource "null_resource" "docker_build" {
-
-    triggers = {
-        always_run = timestamp()
-    }
-
-    provisioner "local-exec" {
-        command = "docker build -t ${var.dockerUsername}/spring-boot-demo-client:latest -t ${var.dockerUsername}/spring-boot-demo-client:${var.runNumber} ../client"
-    }
+locals {
+    image_name = "${var.dockerUsername}/spring-boot-demo"
 }
 
-resource "null_resource" "docker_login" {
+# resource "null_resource" "docker_build" {
 
-    depends_on = [ null_resource.docker_build ]
+#     triggers = {
+#         always_run = timestamp()
+#     }
 
-    triggers = {
-        always_run = timestamp()
-    }
+#     provisioner "local-exec" {
+#         command = "docker build -t ${local.image_name}:latest -t ${local.image_name}:${var.runNumber} ../client"
+#     }
+# }
 
-    provisioner "local-exec" {
-        command = "docker login --username ${var.dockerUsername} --password ${var.dockerAccessToken}"
-    }
+# resource "null_resource" "docker_login" {
+
+#     depends_on = [ null_resource.docker_build ]
+
+#     triggers = {
+#         always_run = timestamp()
+#     }
+
+#     provisioner "local-exec" {
+#         command = "docker login --username ${var.dockerUsername} --password ${var.dockerAccessToken}"
+#     }
+# }
+
+# resource "null_resource" "docker_push" {
+
+#     depends_on = [ null_resource.docker_login ]
+
+#     triggers = {
+#         always_run = timestamp()
+#     }
+
+#     provisioner "local-exec" {
+#         command = "docker push ${local.image_name}"
+#     }
+# }
+
+resource "docker_image" "client" {
+  name = "${local.image_name}:latest"
+
+  build {
+    path = "../client"
+    tag  = ["${local.image_name}:${var.runNumber}"]
+  }
+
+  triggers = {
+    always_run = timestamp()
+  }
 }
 
-resource "null_resource" "docker_push" {
+resource "docker_registry_image" "client" {
+  name = "${local.image_name}:latest"
 
-    depends_on = [ null_resource.docker_login ]
-
-    triggers = {
-        always_run = timestamp()
-    }
-
-    provisioner "local-exec" {
-        command = "docker push ${var.dockerUsername}/spring-boot-demo-client"
-    }
+  build {
+    context = abspath("../client")
+  }
 }
