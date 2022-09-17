@@ -9,8 +9,7 @@ terraform {
 
 provider "docker" {
   registry_auth {
-    address  = "registry-1.docker.io"
-    username = var.dockerUsername
-    password = split(":", base64decode(var.dockerAccessToken))[1]
+    address     = "registry-1.docker.io"
+    config_file = pathexpand("~/.docker/config.json")
   }
 }
