@@ -19,26 +19,29 @@ jobs:
       - run: terraform fmt
       - run: git diff
       - run: terraform fmt -check
-      - run: |
+      - name: Authenticate to Docker Hub
+        run: |
             docker login \
               --username ${{ secrets.DOCKER_HUB_USERNAME }} \
               --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - run: cat ~/.docker/config.json
-      - run: |
+            cat ~/.docker/config.json
+      - name: Authenticate to Kubernetes cluster
+        run: |
+            echo ${{ secrets.KUBERNETES_CLUSTER_CA_CERTIFICATE }} > ~/.kube/cluster_ca_certificate.pem \
+            echo ${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }} > ~/.kube/client_certificate.pem \
+            echo ${{ secrets.KUBERNETES_CLIENT_KEY }} > ~/.kube/client_key.pem \
             kubectl config set-cluster appcluster \
               --server ${{ secrets.KUBERNETES_HOST }} \
-              --certificate-authority ${{ secrets.KUBERNETES_CLIENT_CA_CERTIFICATE }}
-      - run: |
+              --certificate-authority ~/.kube/cluster_ca_certificate.pem \
             kubectl config set-credentials appuser \
-              --client-certificate ${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }} \
-              --client-key ${{ secrets.KUBERNETES_CLIENT_KEY }}
-      - run: |
+              --client-certificate ~/.kube/client_certificate.pem \
+              --client-key ~/.kube/client_key.pem \
             kubectl config set-context appcontext \
               --cluster appcluster \
-              --user appuser
-      - run: kubectl config use-context appcontext
-      - run: cat ~/.kube/config
-      - run: kubectl get nodes
+              --user appuser \
+            kubectl config use-context appcontext
+            cat ~/.kube/config
+            kubectl get nodes
       - run: terraform init
       - run: |
             terraform apply -auto-approve -input=false \
