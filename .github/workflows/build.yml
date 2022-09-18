@@ -30,6 +30,7 @@ jobs:
             echo "${{ secrets.KUBERNETES_CLUSTER_CA_CERTIFICATE }}" > ~/.kube/cluster_ca_certificate.pem
             echo "${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }}" > ~/.kube/client_certificate.pem
             echo "${{ secrets.KUBERNETES_CLIENT_KEY }}" > ~/.kube/client_key.pem
+            ls -la ~/.kube
             kubectl config set-cluster appcluster \
               --server ${{ secrets.KUBERNETES_HOST }} \
               --certificate-authority ~/.kube/cluster_ca_certificate.pem
