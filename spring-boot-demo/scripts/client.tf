@@ -5,8 +5,8 @@ locals {
 resource "null_resource" "docker_client" {
   provisioner "local-exec" {
     command = <<-EOT
-      docker build -t ${local.client_image_name}:${var.run_number} -t ${local.client_image_name}:latest ../client
-      docker push ${local.client_image_name}:${var.run_number} --all-tags
+      docker build ../client --quiet --tag ${local.client_image_name}:${var.run_number} --tag ${local.client_image_name}:latest
+      docker push ${local.client_image_name} --all-tags
     EOT
   }
 
