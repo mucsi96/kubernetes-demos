@@ -1,6 +1,7 @@
+{{- $fullName := include "app.fullname" . -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
+  name: {{ $fullName }}
 data:
-  databaseName: {{ .Values.config.databaseName }}
+  databaseName: {{ required .Values.databaseName }}

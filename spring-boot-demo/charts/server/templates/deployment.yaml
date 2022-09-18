@@ -25,7 +25,8 @@ spec:
             memory: {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
         ports:
-        - containerPort: {{ .Values.global.services.server.port }}
+        - name: http
+          containerPort: 8080
         env:
           - name: MESSAGE
             valueFrom:
@@ -33,33 +34,30 @@ spec:
                 name: {{ $fullName }}
                 key: message
           - name: MYSQL_DATABASE
-            valueFrom:
-              configMapKeyRef:
-                name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
-                key: databaseName
+            value: {{ required .Values.database.name }}
           - name: MYSQL_HOST
-            value: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
+            value: {{ required .Values.database.host }}
           - name: MYSQL_PORT
-            value: {{ .Values.global.services.database.port | quote }}
+            value: {{ required .Values.database.port | quote }}
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
-                name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
+                name: {{ required .Values.database.secretKeyRef }}
                 key: userName
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
+                name: {{ required .Values.database.secretKeyRef }}
                 key: password
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
-            port: {{ .Values.global.services.server.port }}
+            port: http
           initialDelaySeconds: 15
         startupProbe:
           httpGet:
             path: /actuator/health/liveness
-            port: {{ .Values.global.services.server.port }}
+            port: http
           initialDelaySeconds: 30
           failureThreshold: 30
         lifecycle:

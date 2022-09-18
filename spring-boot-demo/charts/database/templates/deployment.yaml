@@ -25,27 +25,25 @@ spec:
             memory: {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
         ports:
-        - containerPort: {{ .Values.global.services.database.port }}
+        - name: http
+          containerPort: 3306
         env:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
+                name: {{ $fullName }}
                 key: rootPassword
           - name: MYSQL_DATABASE
-            valueFrom:
-              configMapKeyRef:
-                name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
-                key: databaseName
+            value: {{ required .Values.name }}
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
-                name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
+                name: {{ $fullName }}
                 key: userName
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ .Release.Name }}-{{ .Values.global.services.database.name }}
+                name: {{ $fullName }}
                 key: password
         volumeMounts:
           - mountPath: /var/lib/mysql

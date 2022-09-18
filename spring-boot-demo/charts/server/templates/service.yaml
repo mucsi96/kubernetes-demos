@@ -1,10 +1,14 @@
+{{- $fullName := include "app.fullname" . -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-{{ .Values.global.services.server.name }}
+  name: {{ $fullName }}
 spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ required .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
   selector:
     {{- include "app.selectorLabels" . | nindent 4 }}
-  ports:
-    - protocol: TCP
-      port: {{ .Values.global.services.server.port }}
