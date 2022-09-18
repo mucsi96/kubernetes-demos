@@ -18,9 +18,6 @@ resource "helm_release" "kubernetes-dashboard" {
 
   set {
     name = "extraArgs"
-    value = yamlencode([
-      "--enable-skip-login",
-      "--enable-insecure-login"
-    ])
+    value = "{--enable-skip-login, --enable-insecure-login}"
   }
 }
