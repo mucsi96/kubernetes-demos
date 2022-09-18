@@ -1,7 +1,0 @@
-kubernetes-dashboard:
-  metricsScraper:
-    enabled: true
-  extraArgs:
-    - --enable-skip-login
-    - --enable-insecure-login
-  protocolHttp: true

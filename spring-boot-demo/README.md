@@ -1,39 +1,11 @@
 # Spring Boot demo
 
-Add helm repository for cert-manager and sealed-secrets
-```bash
-helm repo add jetstack https://charts.jetstack.io
-helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
-```
-
-Update local Helm chart repository cache
-```bash
-helm repo update
-```
-
-Install `cert-manager`
-```bash
-helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.9.1 --set installCRDs=true
-helm install sealed-secrets --namespace kube-system --set-string fullnameOverride=sealed-secrets-controller sealed-secrets/sealed-secrets
-```
-
-Install app
-```bash
-helm install spring-boot-demo .
-```
-
-Upgrade app
-```bash
-helm upgrade spring-boot-demo .
-```
-
 ## Creating secrets
 
 Install `kubeseal` from [https://github.com/bitnami-labs/sealed-secrets/releases](latest releases)
 
-Create `SealedSecrets` in Linux or gitbash
 ```
-echo -n foo | kubeseal --raw --scope cluster-wide
+./create-secret
 ```
 
 ## Resources:
