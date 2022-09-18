@@ -9,24 +9,17 @@ terraform {
 
 provider "docker" {
   registry_auth {
-    address  = "registry-1.docker.io"
-    username = var.docker_username
-    password = var.docker_access_token
+    address     = "registry-1.docker.io"
+    config_file = pathexpand("~/.docker/config.json")
   }
 }
 
 provider "kubernetes" {
-  host                   = var.kubernetes_host
-  client_certificate     = base64decode(var.kubernetes_client_certificate)
-  client_key             = base64decode(var.kubernetes_client_key)
-  cluster_ca_certificate = base64decode(var.kubernetes_cluster_ca_certificate)
+  config_path = "~/.kube/config"
 }
 
 provider "helm" {
   kubernetes {
-    host                   = var.kubernetes_host
-    client_certificate     = base64decode(var.kubernetes_client_certificate)
-    client_key             = base64decode(var.kubernetes_client_key)
-    cluster_ca_certificate = base64decode(var.kubernetes_cluster_ca_certificate)
+    config_path = "~/.kube/config"
   }
 }
