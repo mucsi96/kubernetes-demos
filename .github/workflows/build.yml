@@ -20,12 +20,18 @@ jobs:
       - run: git diff
       - run: terraform fmt -check
       - run: |
-            terraform init \
-              -backend-config 'secret_suffix=state' \
-              -backend-config 'host=${{ secrets.KUBERNETES_HOST }}' \
-              -backend-config 'client_certificate=${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }}' \
-              -backend-config 'client_key=${{ secrets.KUBERNETES_CLIENT_KEY }}' \
-              -backend-config 'cluster_ca_certificate=${{ secrets.KUBERNETES_CLIENT_CA_CERTIFICATE }}'
+            docker login \
+              --username ${{ secrets.DOCKER_HUB_USERNAME }} \
+              --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - run: cat ~/.docker/config.json
+      - run: |
+            kubectl config \
+              --server ${{ secrets.KUBERNETES_HOST }} \
+              --client-certificate ${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }} \
+              --client-key ${{ secrets.KUBERNETES_CLIENT_KEY }} \
+              --certificate-authority ${{ secrets.KUBERNETES_CLIENT_CA_CERTIFICATE }}
+      - run: cat ~/.kube/config
+      - run: terraform init
       - run: |
             terraform apply -auto-approve -input=false \
               -var 'run_number=${{ github.run_number }}' \
