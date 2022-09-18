@@ -2,19 +2,16 @@ locals {
     client_image_name = "${var.docker_username}/${var.app_namespace}-client"
 }
 
-resource "docker_registry_image" "client_with_version" {
-  name = "${local.client_image_name}:${var.run_number}"
-
-  build {
-    context = abspath("../client")
+resource "null_resource" "docker_client" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      docker build -t ${local.client_image_name}:${var.run_number} -t ${local.client_image_name}:latest ../client
+      docker push ${local.client_image_name}:${var.run_number} --all-tags
+    EOT
   }
-}
 
-resource "docker_registry_image" "client_latest" {
-  name = "${local.client_image_name}:latest"
-
-  build {
-    context = abspath("../client")
+  triggers = {
+    always_run = timestamp()
   }
 }
 

@@ -2,18 +2,15 @@ locals {
     server_image_name = "${var.docker_username}/spring-boot-demo-server"
 }
 
-resource "docker_registry_image" "server_with_version" {
-  name = "${local.server_image_name}:${var.run_number}"
-
-  build {
-    context = abspath("../server")
+resource "null_resource" "docker_client" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      docker build -t ${local.server_image_name}:${var.run_number} -t ${local.server_image_name}:latest ../server
+      docker push ${local.server_image_name}:${var.run_number} --all-tags
+    EOT
   }
-}
 
-resource "docker_registry_image" "server_latest" {
-  name = "${local.server_image_name}:latest"
-
-  build {
-    context = abspath("../server")
+  triggers = {
+    always_run = timestamp()
   }
 }
