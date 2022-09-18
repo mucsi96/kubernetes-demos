@@ -21,10 +21,10 @@ jobs:
       - run: terraform fmt -check
       - run: |
             terraform init \
-              -backend-config='host=${{ secrets.KUBERNETES_HOST }}' \
-              -backend-config='client_certificate=${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }}' \
-              -backend-config='client_key=${{ secrets.KUBERNETES_CLIENT_KEY }}' \
-              -backend-config='cluster_ca_certificate=${{ secrets.KUBERNETES_CLIENT_CA_CERTIFICATE }}'
+              -backend-config 'host=${{ secrets.KUBERNETES_HOST }}' \
+              -backend-config 'client_certificate=${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }}' \
+              -backend-config 'client_key=${{ secrets.KUBERNETES_CLIENT_KEY }}' \
+              -backend-config 'cluster_ca_certificate=${{ secrets.KUBERNETES_CLIENT_CA_CERTIFICATE }}'
       - run: |
             terraform apply -auto-approve -input=false \
               -var 'run_number=${{ github.run_number }}' \
