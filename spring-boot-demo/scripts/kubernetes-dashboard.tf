@@ -18,9 +18,9 @@ resource "helm_release" "kubernetes-dashboard" {
 
   set {
     name = "extraArgs"
-    value = [
+    value = "{${join(",", [
         "--enable-skip-login",
         "--enable-insecure-login"
-    ]
+    ])}}"
   }
 }
