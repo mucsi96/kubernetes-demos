@@ -21,8 +21,7 @@ resource "helm_release" "client" {
   create_namespace = true
   chart            = "../charts/client"
   depends_on       = [
-    docker_registry_image.client_with_version,
-    docker_registry_image.client_latest
+    null_resource.docker_client
   ]
 
   set {
