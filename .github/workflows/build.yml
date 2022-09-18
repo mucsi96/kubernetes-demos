@@ -25,11 +25,13 @@ jobs:
               --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - run: cat ~/.docker/config.json
       - run: |
-            kubectl config \
+            kubectl config set-cluster cluster \
               --server ${{ secrets.KUBERNETES_HOST }} \
-              --client-certificate ${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }} \
-              --client-key ${{ secrets.KUBERNETES_CLIENT_KEY }} \
               --certificate-authority ${{ secrets.KUBERNETES_CLIENT_CA_CERTIFICATE }}
+      - run: |
+            kubectl config set-credentials user \
+              --client-certificate ${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }} \
+              --client-key ${{ secrets.KUBERNETES_CLIENT_KEY }}
       - run: cat ~/.kube/config
       - run: terraform init
       - run: |
