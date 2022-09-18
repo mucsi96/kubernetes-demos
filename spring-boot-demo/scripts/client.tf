@@ -1,5 +1,5 @@
 locals {
-    client_image_name = "${var.docker_username}/${var.app_namespace}-client"
+    client_image_name = "mucsi96/${var.app_namespace}-client"
 }
 
 resource "null_resource" "docker_client" {
