@@ -1,5 +1,5 @@
 locals {
-    client_image_name = "${var.docker_username}/spring-boot-demo-client"
+    client_image_name = "${var.docker_username}/${var.app_namespace}-client"
 }
 
 resource "docker_registry_image" "client_with_version" {
@@ -20,7 +20,7 @@ resource "docker_registry_image" "client_latest" {
 
 resource "helm_release" "client" {
   name             = "client"
-  namespace        = "spring-boot-demo"
+  namespace        = var.app_namespace
   create_namespace = true
   chart            = "../charts/client"
   depends_on       = [
@@ -31,5 +31,10 @@ resource "helm_release" "client" {
   set {
     name = "image.tag"
     value = var.run_number
+  }
+
+  set {
+    name = "image.pullPolicy"
+    value = "IfNotPresent"
   }
 }

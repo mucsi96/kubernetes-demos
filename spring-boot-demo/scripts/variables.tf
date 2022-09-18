@@ -25,3 +25,7 @@ variable "kubernetes_client_key" {
 variable "kubernetes_cluster_ca_certificate" {
   type = string
 }
+
+variable "app_namespace" {
+  default = "spring-boot-demo"
+}
