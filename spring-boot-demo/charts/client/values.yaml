@@ -4,7 +4,11 @@ image:
   repository: mucsi96/spring-boot-demo-client
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: ""
+
+service:
+  type: ClusterIP
+  port: 80
 
 resources:
   requests:

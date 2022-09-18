@@ -17,3 +17,18 @@ resource "docker_registry_image" "client_latest" {
     context = abspath("../client")
   }
 }
+
+resource "helm_release" "client" {
+  name       = "client"
+  namespace  = "spring-boot-demo"
+  chart      = "../charts/client"
+  depends_on = [
+    docker_registry_image.client_with_version,
+    docker_registry_image.client_latest
+  ]
+
+  set {
+    name = "image.tag"
+    value = var.run_number
+  }
+}

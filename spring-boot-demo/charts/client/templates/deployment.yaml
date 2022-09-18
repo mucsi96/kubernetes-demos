@@ -25,22 +25,23 @@ spec:
             memory: {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
         ports:
-        - containerPort: {{ .Values.global.services.client.port }}
+        - name: http
+          containerPort: 80
         livenessProbe:
           httpGet:
             path: /?liveness
-            port: {{ .Values.global.services.client.port }}
+            port: http
           initialDelaySeconds: 10
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /?readiness
-            port: {{ .Values.global.services.client.port }}
+            port: http
           initialDelaySeconds: 10
           periodSeconds: 5
         startupProbe:
           httpGet:
             path: /?startup
-            port: {{ .Values.global.services.client.port }}
+            port: http
           failureThreshold: 20
           periodSeconds: 5
