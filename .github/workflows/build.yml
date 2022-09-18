@@ -21,6 +21,7 @@ jobs:
       - run: terraform fmt -check
       - run: |
             terraform init \
+              -backend-config 'secret_suffix=state' \
               -backend-config 'host=${{ secrets.KUBERNETES_HOST }}' \
               -backend-config 'client_certificate=${{ secrets.KUBERNETES_CLIENT_CERTIFICATE }}' \
               -backend-config 'client_key=${{ secrets.KUBERNETES_CLIENT_KEY }}' \
