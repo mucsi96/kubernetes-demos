@@ -29,7 +29,6 @@ spec:
           containerPort: 8080
         - name: liveness-port
           containerPort: {{ $livenessPort }}
-          hostPort: {{ $livenessPort }}
         env:
           - name: MESSAGE
             valueFrom:
