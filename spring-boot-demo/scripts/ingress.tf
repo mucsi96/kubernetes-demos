@@ -1,4 +1,4 @@
-resource "helm_release" "database" {
+resource "helm_release" "ingress" {
   name             = "app-ingress"
   namespace        = var.app_namespace
   create_namespace = true
