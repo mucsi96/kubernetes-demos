@@ -8,12 +8,12 @@ spec:
     - websecure
   routes:
   - kind: Rule
-    match: Host(`{{ .Values.global.hostName }}`) && PathPrefix(`/api`)
+    match: Host(`{{ required "Missing hostName value" .Values.hostName }}`) && PathPrefix(`/api`)
     middlewares:
     {{- include "ingress.commonMiddlewares" . | nindent 4 }}
     - name: {{ $fullName }}-api-stripprefix
     services:
     - kind: Service
-      name: {{ .Release.Name }}-{{ .Values.global.services.server.name }}
-      port: {{ .Values.global.services.server.port }}
+      name: {{ required "Missing serverHost value" .Values.serverHost }}
+      port: http
   {{- include "ingress.tls" . | nindent 2 }}

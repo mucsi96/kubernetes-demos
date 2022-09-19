@@ -2,7 +2,7 @@ variable "run_number" {
   type = string
 }
 
-variable "hostName" {
+variable "host_name" {
   default = "demo.ibari.ch"
 }
 
@@ -36,6 +36,10 @@ variable "server_port" {
 
 variable "database_port" {
   default = 3306
+}
+
+variable "tls_secret_name" {
+  default = "app-tls-secret"
 }
 
 variable "database_root_password" {
