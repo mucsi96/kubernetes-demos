@@ -1,5 +1,5 @@
 {{- $fullName := include "app.fullname" . -}}
-{{ $port := 8080 -}}
+{{ $livenessPort := 8081 -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +26,10 @@ spec:
             cpu: {{ .Values.resources.limits.cpu }}
         ports:
         - name: http
-          containerPort: {{ $port }}
+          containerPort: 8080
+        - name: liveness-port
+          containerPort: {{ $livenessPort }}
+          hostPort: {{ $livenessPort }}
         env:
           - name: MESSAGE
             valueFrom:
@@ -52,12 +55,12 @@ spec:
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
-            port: {{ $port }}
+            port: {{ $livenessPort }}
           initialDelaySeconds: 15
         startupProbe:
           httpGet:
             path: /actuator/health/liveness
-            port: {{ $port }}
+            port: {{ $livenessPort }}
           initialDelaySeconds: 30
           failureThreshold: 30
         lifecycle:
