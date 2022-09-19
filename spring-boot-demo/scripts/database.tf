@@ -1,5 +1,5 @@
 resource "helm_release" "database" {
-  name             = "database"
+  name             = var.database_host
   namespace        = var.app_namespace
   create_namespace = true
   chart            = "../charts/database"

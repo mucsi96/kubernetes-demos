@@ -16,7 +16,7 @@ resource "null_resource" "docker_client" {
 }
 
 resource "helm_release" "client" {
-  name             = "client"
+  name             = var.client_host
   namespace        = var.app_namespace
   create_namespace = true
   chart            = "../charts/client"

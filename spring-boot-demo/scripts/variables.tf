@@ -14,6 +14,18 @@ variable "app_namespace" {
   default = "spring-boot-demo"
 }
 
+variable "client_host" {
+  default = "app-client"
+}
+
+variable "server_host" {
+  default = "app-server"
+}
+
+variable "database_host" {
+  default = "app-database"
+}
+
 variable "client_port" {
   default = 80
 }

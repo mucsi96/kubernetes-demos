@@ -16,7 +16,7 @@ resource "null_resource" "docker_server" {
 }
 
 resource "helm_release" "server" {
-  name             = "server"
+  name             = var.server_host
   namespace        = var.app_namespace
   create_namespace = true
   chart            = "../charts/server"
@@ -41,7 +41,7 @@ resource "helm_release" "server" {
 
   set {
     name  = "database.host"
-    value = "database"
+    value = var.database_host
   }
 
   set {
