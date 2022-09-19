@@ -45,6 +45,11 @@ resource "helm_release" "server" {
   }
 
   set {
+    name  = "database.port"
+    value = var.database_port
+  }
+
+  set {
     name  = "database.userName"
     value = var.database_user_name
   }
