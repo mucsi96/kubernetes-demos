@@ -61,7 +61,7 @@ spec:
           httpGet:
             path: /actuator/health/liveness
             port: {{ $livenessPort }}
-          initialDelaySeconds: 300
+          initialDelaySeconds: 15
           failureThreshold: 30
         lifecycle:
           preStop:
