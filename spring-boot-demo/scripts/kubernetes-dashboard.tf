@@ -24,7 +24,7 @@ resource "helm_release" "kubernetes-dashboard" {
 
 resource "kubernetes_cluster_role_binding" "kubernetes-dashboard" {
   metadata {
-    name      = "kubernetes-dashboard"
+    name = "kubernetes-dashboard"
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
