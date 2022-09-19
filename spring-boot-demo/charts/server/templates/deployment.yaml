@@ -52,17 +52,17 @@ spec:
               secretKeyRef:
                 name: {{ $fullName }}
                 key: password
-        livenessProbe:
-          httpGet:
-            path: /actuator/health/liveness
-            port: {{ $livenessPort }}
-          initialDelaySeconds: 15
-        startupProbe:
-          httpGet:
-            path: /actuator/health/liveness
-            port: {{ $livenessPort }}
-          initialDelaySeconds: 30
-          failureThreshold: 30
+        # livenessProbe:
+        #   httpGet:
+        #     path: /actuator/health/liveness
+        #     port: {{ $livenessPort }}
+        #   initialDelaySeconds: 15
+        # startupProbe:
+        #   httpGet:
+        #     path: /actuator/health/liveness
+        #     port: {{ $livenessPort }}
+        #   initialDelaySeconds: 30
+        #   failureThreshold: 30
         lifecycle:
           preStop:
             exec:
