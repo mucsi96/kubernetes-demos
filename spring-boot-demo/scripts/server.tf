@@ -1,5 +1,5 @@
 locals {
-  server_image_name = "mucsi96/${var.app_namespace}-server"
+  server_image_name = "mucsi96/${var.app.namespace}-server"
 }
 
 resource "null_resource" "docker_server" {
@@ -16,8 +16,8 @@ resource "null_resource" "docker_server" {
 }
 
 resource "helm_release" "server" {
-  name             = var.server_host
-  namespace        = var.app_namespace
+  name             = var.app.server.host
+  namespace        = var.app.namespace
   create_namespace = true
   chart            = "../charts/server"
   depends_on = [
@@ -31,31 +31,31 @@ resource "helm_release" "server" {
 
   set {
     name  = "service.port"
-    value = var.server_port
+    value = var.app.server.port
   }
 
   set {
     name  = "database.name"
-    value = var.app_namespace
+    value = var.app.namespace
   }
 
   set {
     name  = "database.host"
-    value = var.database_host
+    value = var.app.database.host
   }
 
   set {
     name  = "database.port"
-    value = var.database_port
+    value = var.app.database.port
   }
 
   set {
     name  = "database.userName"
-    value = var.database_user_name
+    value = var.app.database.username
   }
 
   set {
     name  = "database.password"
-    value = var.database_password
+    value = var.app.database.password
   }
 }

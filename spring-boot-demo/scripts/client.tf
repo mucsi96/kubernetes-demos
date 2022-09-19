@@ -1,5 +1,5 @@
 locals {
-  client_image_name = "mucsi96/${var.app_namespace}-client"
+  client_image_name = "mucsi96/${var.app.namespace}-client"
 }
 
 resource "null_resource" "docker_client" {
@@ -16,8 +16,8 @@ resource "null_resource" "docker_client" {
 }
 
 resource "helm_release" "client" {
-  name             = var.client_host
-  namespace        = var.app_namespace
+  name             = var.app.client.host
+  namespace        = var.app.namespace
   create_namespace = true
   chart            = "../charts/client"
   depends_on = [
@@ -31,6 +31,6 @@ resource "helm_release" "client" {
 
   set {
     name  = "service.port"
-    value = var.client_port
+    value = var.app.client.port
   }
 }

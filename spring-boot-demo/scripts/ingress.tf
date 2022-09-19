@@ -1,26 +1,26 @@
 resource "helm_release" "ingress" {
   name             = "app-ingress"
-  namespace        = var.app_namespace
+  namespace        = var.app.namespace
   create_namespace = true
   chart            = "../charts/ingress"
 
   set {
     name  = "hostName"
-    value = var.host_name
+    value = var.app.hostname
   }
 
   set {
     name  = "clientHost"
-    value = var.client_host
+    value = var.app.client.host
   }
 
   set {
     name  = "serverHost"
-    value = var.server_host
+    value = var.app.server.host
   }
 
   set {
     name  = "tlsSecretName"
-    value = var.tls_secret_name
+    value = var.app.tls.secret_name
   }
 }
