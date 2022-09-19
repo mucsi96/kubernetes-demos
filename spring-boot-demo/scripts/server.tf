@@ -1,5 +1,5 @@
 locals {
-    server_image_name = "mucsi96/${var.app_namespace}-server"
+  server_image_name = "mucsi96/${var.app_namespace}-server"
 }
 
 resource "null_resource" "docker_server" {

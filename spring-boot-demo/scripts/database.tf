@@ -5,27 +5,27 @@ resource "helm_release" "database" {
   chart            = "../charts/database"
 
   set {
-    name = "name"
+    name  = "name"
     value = var.app_namespace
   }
 
   set {
-    name = "service.port"
+    name  = "service.port"
     value = var.database_port
   }
 
   set {
-    name = "rootPassword"
+    name  = "rootPassword"
     value = var.database_root_password
   }
 
   set {
-    name = "userName"
+    name  = "userName"
     value = var.database_user_name
   }
 
   set {
-    name = "password"
+    name  = "password"
     value = var.database_password
   }
 }

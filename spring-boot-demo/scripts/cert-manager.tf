@@ -7,7 +7,7 @@ resource "helm_release" "cert-manager" {
   version          = "v1.9.1"
 
   set {
-    name = "installCRDs"
+    name  = "installCRDs"
     value = "true"
   }
 }

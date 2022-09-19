@@ -7,17 +7,17 @@ resource "helm_release" "kubernetes-dashboard" {
   version          = "5.10.0"
 
   set {
-    name = "metricsScraper.enabled"
+    name  = "metricsScraper.enabled"
     value = "true"
   }
 
   set {
-    name = "protocolHttp"
+    name  = "protocolHttp"
     value = "true"
   }
 
   set {
-    name = "extraArgs"
+    name  = "extraArgs"
     value = "{--enable-skip-login, --enable-insecure-login}"
   }
 }

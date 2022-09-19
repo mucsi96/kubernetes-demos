@@ -6,7 +6,7 @@ resource "helm_release" "sealed-secrets" {
   version    = "2.6.4"
 
   set {
-    name = "fullnameOverride"
+    name  = "fullnameOverride"
     value = "sealed-secrets-controller"
   }
 }
