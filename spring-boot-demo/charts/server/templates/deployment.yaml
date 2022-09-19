@@ -16,7 +16,6 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
           requests:
             memory: {{ .Values.resources.requests.memory }}
@@ -42,12 +41,12 @@ spec:
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
-                name: {{ required .Values.database.secretKeyRef }}
+                name: {{ $fullName }}
                 key: userName
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ required .Values.database.secretKeyRef }}
+                name: {{ $fullName }}
                 key: password
         livenessProbe:
           httpGet:

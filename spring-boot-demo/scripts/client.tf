@@ -30,7 +30,7 @@ resource "helm_release" "client" {
   }
 
   set {
-    name = "image.pullPolicy"
-    value = "IfNotPresent"
+    name = "service.port"
+    value = var.client_port
   }
 }
