@@ -33,11 +33,11 @@ spec:
                 name: {{ $fullName }}
                 key: message
           - name: MYSQL_DATABASE
-            value: {{ required .Values.database.name }}
+            value: {{ required "Missing database.name value" .Values.database.name }}
           - name: MYSQL_HOST
-            value: {{ required .Values.database.host }}
+            value: {{ required "Missing database.host value" .Values.database.host }}
           - name: MYSQL_PORT
-            value: {{ required .Values.database.port | quote }}
+            value: {{ required "Missing database.port value" .Values.database.port | quote }}
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:

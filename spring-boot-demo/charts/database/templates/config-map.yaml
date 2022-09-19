@@ -4,4 +4,4 @@ kind: ConfigMap
 metadata:
   name: {{ $fullName }}
 data:
-  databaseName: {{ required .Values.databaseName }}
+  databaseName: {{ required "Missing databaseName value" .Values.databaseName }}

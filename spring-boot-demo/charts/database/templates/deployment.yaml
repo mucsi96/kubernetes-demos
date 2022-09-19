@@ -33,7 +33,7 @@ spec:
                 name: {{ $fullName }}
                 key: rootPassword
           - name: MYSQL_DATABASE
-            value: {{ required .Values.name }}
+            value: {{ required "Missing name value" .Values.name }}
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
