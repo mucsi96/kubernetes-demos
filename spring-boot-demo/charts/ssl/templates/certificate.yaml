@@ -3,6 +3,8 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: {{ $fullName }}
+  labels:
+    {{- include "ssl.labels" . | nindent 4 }}
 spec:
   secretName: {{ .Release.Name }}-{{ .Values.global.services.ssl.name }}
   issuerRef:

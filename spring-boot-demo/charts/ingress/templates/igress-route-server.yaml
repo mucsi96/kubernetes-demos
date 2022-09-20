@@ -3,6 +3,8 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: {{ $fullName }}-server
+  labels:
+    {{- include "ingress.labels" . | nindent 4 }}
 spec:
   entryPoints: 
     - websecure
