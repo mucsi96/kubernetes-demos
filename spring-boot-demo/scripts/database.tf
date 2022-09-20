@@ -21,7 +21,7 @@ resource "helm_release" "database" {
 
   set {
     name  = "userName"
-    value = var.app.database.user_name
+    value = var.app.database.username
   }
 
   set {
