@@ -20,32 +20,3 @@ Get cluster nodes from your local machine.
 ```bash
 kubectl get nodes
 ```
-
-## Adding Kubernetes Dashboard
-
-Add helm repository for kubernetes-dashboard
-```bash
-helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard
-```
-
-Update local Helm chart repository cache
-```bash
-helm repo update
-```
-
-Install Kubernetes Dashboard
-```bash
-helm install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --set extraArgs="{--enable-skip-login,--enable-insecure-login}" --set protocolHttp=true
-```
-
-Forward a local port to a port on the Pod
-```
-kubectl -n default port-forward <POD_NAME> 9090:9090
-```
-
-Obtain the Bearer Token
-```
-kubectl create token kubernetes-dashboard
-```
-
-Open http://localhost:9090/ and click sign in and provide the created token.
