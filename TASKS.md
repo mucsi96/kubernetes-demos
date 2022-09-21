@@ -4,7 +4,6 @@
 - add actuator ui
 - create scripts to expose database, actuator
 - create interactive main script
-- deploy helm template with terraform as part of CI pipeline
 - add scheduled backups from db to s3 (mysqldumb)
 - add metrics https://k3s.rocks/metrics/ https://getbetterdevops.io/terraform-with-helm/
 - add logging https://grafana.com/blog/2022/04/26/set-up-and-observe-a-spring-boot-application-with-grafana-cloud-prometheus-and-opentelemetry/ https://getbetterdevops.io/terraform-with-helm/
