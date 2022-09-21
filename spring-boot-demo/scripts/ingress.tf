@@ -4,6 +4,7 @@ data "local_file" "ingress_chart_version" {
 
 resource "helm_release" "ingress" {
   name             = "app-ingress"
+  version          = data.local_file.ingress_chart_version.content
   namespace        = var.app.namespace
   create_namespace = true
   chart            = "../charts/ingress"

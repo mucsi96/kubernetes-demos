@@ -28,6 +28,7 @@ resource "null_resource" "client_image" {
 
 resource "helm_release" "client" {
   name             = var.app.client.host
+  version          = data.local_file.client_chart_version.content
   namespace        = var.app.namespace
   create_namespace = true
   chart            = "../charts/client"
@@ -39,8 +40,4 @@ resource "helm_release" "client" {
     name  = "service.port"
     value = var.app.client.port
   }
-
-  # triggers = {
-  #   version = data.local_file.client_chart_version.content
-  # }
 }

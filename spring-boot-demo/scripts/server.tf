@@ -28,6 +28,7 @@ resource "null_resource" "server_image" {
 
 resource "helm_release" "server" {
   name             = var.app.server.host
+  version          = data.local_file.server_chart_version.content
   namespace        = var.app.namespace
   create_namespace = true
   chart            = "../charts/server"
@@ -64,8 +65,4 @@ resource "helm_release" "server" {
     name  = "database.password"
     value = var.app.database.password
   }
-
-  # triggers = {
-  #   version = data.local_file.server_image_version.content
-  # }
 }

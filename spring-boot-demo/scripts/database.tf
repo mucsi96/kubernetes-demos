@@ -4,6 +4,7 @@ data "local_file" "database_chart_version" {
 
 resource "helm_release" "database" {
   name             = var.app.database.host
+  version          = data.local_file.database_chart_version.content
   namespace        = var.app.namespace
   create_namespace = true
   chart            = "../charts/database"
@@ -32,8 +33,4 @@ resource "helm_release" "database" {
     name  = "password"
     value = var.app.database.password
   }
-
-  # triggers = {
-  #   version = data.local_file.database_chart_version.content
-  # }
 }
