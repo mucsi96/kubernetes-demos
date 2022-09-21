@@ -2,7 +2,15 @@ locals {
   client_image_name = "mucsi96/${var.app.namespace}-client"
 }
 
-resource "null_resource" "docker_client" {
+data "local_file" "client_image_version" {
+  filename = "../client/version.txt"
+}
+
+data "local_file" "client_chart_version" {
+  filename = "../charts/client/version.txt"
+}
+
+resource "null_resource" "client_image" {
   provisioner "local-exec" {
     command = <<-EOT
       docker build ../client --quiet --tag ${local.client_image_name}:${var.run_number} --tag ${local.client_image_name}:latest
@@ -11,7 +19,7 @@ resource "null_resource" "docker_client" {
   }
 
   triggers = {
-    always_run = timestamp()
+    version = data.local_file.client_image_version.content
   }
 }
 
@@ -21,16 +29,15 @@ resource "helm_release" "client" {
   create_namespace = true
   chart            = "../charts/client"
   depends_on = [
-    null_resource.docker_client
+    null_resource.client_image
   ]
-
-  set {
-    name  = "image.tag"
-    value = var.run_number
-  }
 
   set {
     name  = "service.port"
     value = var.app.client.port
   }
+
+  # triggers = {
+  #   version = data.local_file.client_chart_version.content
+  # }
 }

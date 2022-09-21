@@ -1,3 +1,7 @@
+data "local_file" "ingress_chart_version" {
+  filename = "../charts/ingress/version.txt"
+}
+
 resource "helm_release" "ingress" {
   name             = "app-ingress"
   namespace        = var.app.namespace

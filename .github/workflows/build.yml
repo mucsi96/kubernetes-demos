@@ -8,9 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./spring-boot-demo/scripts
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
@@ -40,9 +37,13 @@ jobs:
             kubectl config use-context appcontext
             cat ~/.kube/config
             kubectl get nodes
+      - name: Update versions
+        run: ./version.sh
+        working-directory: ./spring-boot-demo
       - name: Deploy
         run: |
             terraform fmt -check -diff
             terraform init
             terraform apply -auto-approve -input=false \
               -var 'run_number=${{ github.run_number }}'
+        working-directory: ./spring-boot-demo/scripts

@@ -2,7 +2,15 @@ locals {
   server_image_name = "mucsi96/${var.app.namespace}-server"
 }
 
-resource "null_resource" "docker_server" {
+data "local_file" "server_image_version" {
+  filename = "../server/version.txt"
+}
+
+data "local_file" "server_chart_version" {
+  filename = "../charts/server/version.txt"
+}
+
+resource "null_resource" "server_image" {
   provisioner "local-exec" {
     command = <<-EOT
       docker build ../server --quiet --tag ${local.server_image_name}:${var.run_number} --tag ${local.server_image_name}:latest
@@ -11,7 +19,7 @@ resource "null_resource" "docker_server" {
   }
 
   triggers = {
-    always_run = timestamp()
+    version = data.local_file.server_image_version.content
   }
 }
 
@@ -21,13 +29,8 @@ resource "helm_release" "server" {
   create_namespace = true
   chart            = "../charts/server"
   depends_on = [
-    null_resource.docker_server
+    null_resource.server_image
   ]
-
-  set {
-    name  = "image.tag"
-    value = var.run_number
-  }
 
   set {
     name  = "service.port"
@@ -58,4 +61,8 @@ resource "helm_release" "server" {
     name  = "database.password"
     value = var.app.database.password
   }
+
+  # triggers = {
+  #   version = data.local_file.server_image_version.content
+  # }
 }
