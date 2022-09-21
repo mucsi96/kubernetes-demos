@@ -10,15 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_wrapper: false
       - name: Authenticate to Docker Hub
         run: |
             docker login \
               --username ${{ secrets.DOCKER_HUB_USERNAME }} \
               --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-            cat ~/.docker/config.json
       - name: Authenticate to Kubernetes cluster
         run: |
             mkdir ~/.kube
@@ -35,8 +31,6 @@ jobs:
               --cluster appcluster \
               --user appuser
             kubectl config use-context appcontext
-            cat ~/.kube/config
-            kubectl get nodes
       - name: Update versions
         run: ./version.sh
         working-directory: ./spring-boot-demo
