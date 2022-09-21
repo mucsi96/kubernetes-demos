@@ -13,7 +13,10 @@ data "local_file" "server_chart_version" {
 resource "null_resource" "server_image" {
   provisioner "local-exec" {
     command = <<-EOT
-      docker build ../server --quiet --tag ${local.server_image_name}:${var.run_number} --tag ${local.server_image_name}:latest
+      docker build ../server \
+        --quiet \
+        --tag ${local.server_image_name}:${data.local_file.server_image_version.content} \
+        --tag ${local.server_image_name}:latest
       docker push ${local.server_image_name} --all-tags
     EOT
   }

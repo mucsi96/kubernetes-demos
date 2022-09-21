@@ -1,7 +1,3 @@
-variable "run_number" {
-  type = string
-}
-
 variable "app" {
   default = {
     namespace = "spring-boot-demo"
