@@ -16,5 +16,5 @@ spec:
     - name: {{ $fullName }}-http-to-https
     services:
     - kind: Service
-      name: {{ required "Misssing serverHost value" .Values.serverHost }}
+      name: {{ required "Missing serverHost value" .Values.serverHost }}
       port: http
