@@ -5,7 +5,7 @@ Contains demonstrations from simple to more advanced setups
 2. Kubernetes + Nginx
 3. Helm + Nginx
 4. Helm + Nginx + Cert Manager
-5. Spring Boot + Nginx + MySQL + Terraform + Helm + Cert Manager
+5. Spring Boot + Nginx + MySQL + Docker + Terraform + Helm + Cert Manager
 
 ## Setup the cluster
 
