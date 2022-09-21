@@ -1,5 +1,3 @@
-- create docker images, helm charts based on src sha
-- add appVesrion and helm chart version to charts
 - use terraform modules
 - expose actuator health details
 - expose whole actuator
