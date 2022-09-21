@@ -1,6 +1,5 @@
 #!/bin/bash
 
-nl=$'\n'
 namespace=spring-boot-demo
 
 kubectl create configmap version-table --namespace $namespace >/dev/null 2>/dev/null
