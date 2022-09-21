@@ -1,4 +1,11 @@
-# vpsfiles
+# kubernetes-demos
+
+Contains demonstrations from simple to more advanced setups
+1. Docker + Nginx
+2. Kubernetes + Nginx
+3. Helm + Nginx
+4. Helm + Nginx + Cert Manager
+5. Spring Boot + Nginx + MySQL + Terraform + Helm + Cert Manager
 
 ## Setup the cluster
 
