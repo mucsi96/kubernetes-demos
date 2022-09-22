@@ -1,5 +1,7 @@
 # kubernetes-demos
 
+[![CI](https://github.com/mucsi96/kubernetes-demos/actions/workflows/build.yml/badge.svg)](https://github.com/mucsi96/kubernetes-demos/actions/workflows/build.yml)
+
 Contains demonstrations from simple to more advanced setups
 1. Docker Compose + Nginx
 2. Kubernetes + Nginx
