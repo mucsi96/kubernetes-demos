@@ -1,6 +1,10 @@
 locals {
   namespace = "spring-boot-demo"
   email     = "mucsi96@gmail.com"
+
+}
+
+locals {
   database = {
     host          = "app-database"
     port          = 3306

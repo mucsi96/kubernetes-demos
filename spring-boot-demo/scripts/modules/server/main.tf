@@ -1,8 +1,8 @@
-data "local_file" "server_image_version" {
+data "local_file" "image_version" {
   filename = "../server/version.txt"
 }
 
-data "local_file" "server_chart_version" {
+data "local_file" "chart_version" {
   filename = "../charts/server/version.txt"
 }
 
