@@ -16,6 +16,6 @@ spec:
     - name: {{ $fullName }}-api-stripprefix
     services:
     - kind: Service
-      name: {{ required "Missing serverHost value" .Values.serverHost }}
+      name: {{ required "Misssing serverHost value" .Values.serverHost }}
       port: http
   {{- include "ingress.tls" . | nindent 2 }}
