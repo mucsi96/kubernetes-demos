@@ -2,6 +2,7 @@
 
 namespace=spring-boot-demo
 
+kubectl create namespace $namespace >/dev/null 2>/dev/null
 kubectl create configmap version-table --namespace $namespace >/dev/null 2>/dev/null
 
 versions=$(kubectl get configmap version-table --namespace $namespace -o jsonpath="{.data.content}" | tr '|' '\n')
