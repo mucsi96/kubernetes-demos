@@ -54,7 +54,7 @@ spec:
                 name: {{ $fullName }}
                 key: password
           - name: MANAGEMENT_SERVER_PORT
-            value: {{ $managementPort }}
+            value: {{ $managementPort | quote }}
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
