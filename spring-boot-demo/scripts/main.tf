@@ -11,6 +11,10 @@ locals {
     username      = "AgAcvCEeDAMxqAo8FfaQPJkO1s0+kpts6eiNoiZ+ugHt5TuAVoVeH4ns/TLOGv6MMtPPIxPL57pKhtWLKr5MVashLR3i1JrpZ094gqbS9vyk4jkkabKXS9sqdFy+P0LDu9OOydsNnsHAl9IkHPoDcAXdEt+TGZl/PLkdIvots3ZJXqBzrWuU0dEG1gifYnP5oA1AJiIC463YgbFEh7v1JCLe3lPa0Z3EM2goFsapdKTzXW4MlwNaZ+oIL9k0ZdwZaXKVja4WjuIuzotMD5ejMVWps27dYoVpBZ8FkHlZtfW4bnbM1PWxgMCKn4WeYen3UmQJz5M9UZAYxWG6wMDWoy/e8k+aziFa88jAlUn0JhrFL3EPk5jeqf4X+/OgaxmULiwzRW6OxQ90baio6lm1X/TBDqU5IGPVFcfnW6+8cKwQFuIxVwbH0vw0LYyOT47tElL4YVjDOPnuR0K0z1vZPTt+nvhjR35HWbYuAqF0RX6EUaSGT4TMFvhLcIvya9Ht/lXGKePjIChSGV71ykhcM/MYm4yI9WfO9ZYosl7nr5O9aDXw7WJ63+QxTrUCuJkFcCjtkOrY/wqtKpGgYzVingsTk8X4K+wbT/32rCoOxhjJSwf4csmDBEWMerB/Em7DED+HLZlVYirq8FOOo4u9ZcAzg0zaOlhDyrFPNuY1ylY+IFQMdgTCVnkJQDzZSCMphbmiuGynqAKDRw=="
     password      = "AgDZJXPHdTTubhQO+KVlKmGbMOZ7eWRi2twGOd7Ly2qxYMkK7dZ+qPAkoOiZ/TcmAXvez0LxgDOc4ZdCIBKfmYK63GL9RoMTDaFwlM74eNdyqSdCfDKgyuqW+duFPo0Y3JMcPpcCcyI0pvWcj2hmoNURHQK7TyAhzU6AZuJRAJjeM1NTrrqCstkuw+vr6NPcGMGUsPPWyW3XUmfejZQdTIVJqzVKdywvNL4PQ3Ib1tdidj9XUJxRJyOwi2NeE3eRsfeLhElMe2hz/kK53+1A4/YxUMSGv3lz0xKbyZEgrLTbO0nxLYQqx0iKoP9J2zHvz26c0SbgMsaQEHNLmnsDQ1HY68K60o05Dz/5CVoMDn1r5izsYCgixMb8a6pBw2ZaP3LrJo6ZLgp9XlnIxabIdnP39cjtJPsD0OYhqkRsysD5FnLEo3Ffz6MWFipmxDwI37xJNxTQhUvb43StamWd1z2Pe8qMNY+tlWNouC0887uLOXmipSzO1XUjbJrXRguPbiqTFBJvmOLH3yS2X11JRHU1GJjy8/0H5M7IRMIqLSedV1SRd9efozgZqNiFXK/fRe0OtcnQq794MxqSX8AHxV38Nq9oBOWqXqTb/GTBDroTozzaVTQ3HRfEyhTqsS5wYNUtKU/Bx7qO1Y5TfRRq0DAd8eAc78ZeqXvBlaqbV+LUDCN0XjNWYWk3FWxaYh/RrYcsONHgmIHDdTXxzm3TN7N2"
   }
+  spring-boot-admin = {
+    host = "spring-boot-admin-server"
+    port = 9090
+  }
 }
 
 module "client" {
@@ -29,6 +33,7 @@ module "server" {
   port            = 8080
   database        = local.database
   management_port = 8082
+  admin_server    = local.spring-boot-admin
 }
 
 module "database" {
@@ -63,4 +68,11 @@ module "sealed-secrets" {
 
 module "kubernetes-dashboard" {
   source = "./modules/kubernetes-dashboard"
+}
+
+module "spring-boot-admin" {
+  source    = "./modules/spring-boot-admin"
+  namespace = local.namespace
+  host      = local.spring-boot-admin.host
+  port      = local.spring-boot-admin.port
 }

@@ -104,6 +104,7 @@ set_version chart client
 set_version chart server
 set_version chart database
 set_version chart ingress
+set_version chart spring-boot-admin
 
 echo "$versions"
 content=$(echo "$versions" | tr '\n' '|')

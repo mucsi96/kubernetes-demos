@@ -66,4 +66,14 @@ resource "helm_release" "chart" {
     name  = "managementPort"
     value = var.management_port
   }
+
+  set {
+    name  = "adminServer.port"
+    value = var.admin_server.port
+  }
+
+  set {
+    name  = "adminServer.host"
+    value = var.admin_server.host
+  }
 }

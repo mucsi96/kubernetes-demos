@@ -27,3 +27,10 @@ variable "database" {
 variable "management_port" {
   type = string
 }
+
+variable "admin_server" {
+  type = object({
+    host = string
+    port = number
+  })
+}

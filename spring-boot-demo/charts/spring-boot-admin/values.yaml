@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: codecentric/spring-boot-admin
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+service:
+  type: ClusterIP
+
+resources: 
+  requests:
+    memory: 200Mi
+    cpu: 200m
+  limits:
+    memory: 500Mi
+    cpu: 400m

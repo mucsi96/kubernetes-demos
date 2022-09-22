@@ -1,8 +1,8 @@
-- add actuator ui
+- add actuator ui https://hub.docker.com/r/codecentric/spring-boot-admin https://piotrminkowski.com/2020/02/18/spring-boot-admin-on-kubernetes/
 - create scripts to expose database, actuator
 - create interactive main script
 - add scheduled backups from db to s3 (mysqldumb)
 - add metrics https://k3s.rocks/metrics/ https://getbetterdevops.io/terraform-with-helm/
 - add logging https://grafana.com/blog/2022/04/26/set-up-and-observe-a-spring-boot-application-with-grafana-cloud-prometheus-and-opentelemetry/ https://getbetterdevops.io/terraform-with-helm/
-- add helm tests
+- add e2e tests https://bonigarcia.dev/selenium-jupiter/
 - generate random secrets https://registry.terraform.io/providers/hashicorp/random/latest/docs
