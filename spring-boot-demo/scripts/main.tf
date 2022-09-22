@@ -1,6 +1,8 @@
 locals {
-  namespace = "spring-boot-demo"
-  email     = "mucsi96@gmail.com"
+  hostname                  = "demo.ibari.ch"
+  namespace                 = "spring-boot-demo"
+  email                     = "mucsi96@gmail.com"
+  certificate_issuer_server = "https://acme-v02.api.letsencrypt.org/directory"
   database = {
     host          = "app-database"
     port          = 3306
@@ -41,12 +43,14 @@ module "database" {
 }
 
 module "ingress" {
-  source          = "./modules/ingress"
-  namespace       = local.namespace
-  hostname        = "demo.ibari.ch"
-  tls_secret_name = "app-tls-secret"
-  client_host     = "app-client"
-  server_host     = "app-server"
+  source                    = "./modules/ingress"
+  namespace                 = local.namespace
+  hostname                  = local.hostname
+  client_host               = "app-client"
+  server_host               = "app-server"
+  certificate_issue_email   = local.email
+  certificate_issuer_server = local.certificate_issuer_server
+  tls_secret_name           = "app-tls-secret"
 }
 
 module "cert-manager" {

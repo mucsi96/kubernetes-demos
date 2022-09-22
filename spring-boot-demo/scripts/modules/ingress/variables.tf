@@ -17,3 +17,11 @@ variable "client_host" {
 variable "server_host" {
   type = string
 }
+
+variable "certificate_issuer_server" {
+  type = string
+}
+
+variable "certificate_issue_email" {
+  type = string
+}
