@@ -2,30 +2,30 @@ data "local_file" "ingress_chart_version" {
   filename = "../charts/ingress/version.txt"
 }
 
-resource "helm_release" "ingress" {
+resource "helm_release" "chart" {
   name             = "app-ingress"
   version          = data.local_file.ingress_chart_version.content
-  namespace        = var.app.namespace
+  namespace        = var.namespace
   create_namespace = true
   chart            = "../charts/ingress"
 
   set {
     name  = "hostName"
-    value = var.app.hostname
+    value = var.hostname
   }
 
   set {
     name  = "clientHost"
-    value = var.app.client.host
+    value = var.client_host
   }
 
   set {
     name  = "serverHost"
-    value = var.app.server.host
+    value = var.server_host
   }
 
   set {
     name  = "tlsSecretName"
-    value = var.app.tls.secret_name
+    value = var.tls_secret_name
   }
 }

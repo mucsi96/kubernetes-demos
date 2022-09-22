@@ -2,6 +2,7 @@
 - expose actuator health details
 - expose whole actuator
 - add actuator ui
+- pass actuator port from terreform
 - create scripts to expose database, actuator
 - create interactive main script
 - add scheduled backups from db to s3 (mysqldumb)

@@ -2,35 +2,35 @@ data "local_file" "database_chart_version" {
   filename = "../charts/database/version.txt"
 }
 
-resource "helm_release" "database" {
-  name             = var.app.database.host
+resource "helm_release" "chart" {
+  name             = var.host
   version          = data.local_file.database_chart_version.content
-  namespace        = var.app.namespace
+  namespace        = var.namespace
   create_namespace = true
   chart            = "../charts/database"
 
   set {
     name  = "name"
-    value = var.app.namespace
+    value = var.name
   }
 
   set {
     name  = "service.port"
-    value = var.app.database.port
+    value = var.port
   }
 
   set {
     name  = "rootPassword"
-    value = var.app.database.root_password
+    value = var.root_password
   }
 
   set {
     name  = "userName"
-    value = var.app.database.username
+    value = var.username
   }
 
   set {
     name  = "password"
-    value = var.app.database.password
+    value = var.password
   }
 }
