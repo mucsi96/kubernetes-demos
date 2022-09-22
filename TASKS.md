@@ -1,4 +1,3 @@
-- add tls
 - add actuator ui
 - create scripts to expose database, actuator
 - create interactive main script
