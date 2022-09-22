@@ -48,7 +48,7 @@ resource "kubernetes_manifest" "tls_certificate" {
         name = local.issuer_name
         kind = "ClusterIssuer"
       }
-      dnsNames = [var.hostName]
+      dnsNames = [var.hostname]
     }
   }
 }
