@@ -1,5 +1,5 @@
 {{- $fullName := include "app.fullname" . -}}
-{{ $livenessPort := 8081 -}}
+{{ $managementPort := required "Missing managementPort value" .Values.managementPort -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -30,7 +30,7 @@ spec:
         - name: http
           containerPort: 8080
         - name: liveness-port
-          containerPort: {{ $livenessPort }}
+          containerPort: {{ $managementPort }}
         env:
           - name: MESSAGE
             valueFrom:
@@ -53,15 +53,17 @@ spec:
               secretKeyRef:
                 name: {{ $fullName }}
                 key: password
+          - name: MANAGEMENT_SERVER_PORT
+            value: {{ $managementPort }}
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
-            port: {{ $livenessPort }}
+            port: {{ $managementPort }}
           initialDelaySeconds: 15
         startupProbe:
           httpGet:
             path: /actuator/health/liveness
-            port: {{ $livenessPort }}
+            port: {{ $managementPort }}
           initialDelaySeconds: 15
           failureThreshold: 30
         lifecycle:

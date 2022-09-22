@@ -23,3 +23,7 @@ variable "database" {
     password = string
   })
 }
+
+variable "management_port" {
+  type = string
+}

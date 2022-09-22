@@ -20,12 +20,13 @@ module "client" {
 }
 
 module "server" {
-  source     = "./modules/server"
-  namespace  = local.namespace
-  image_name = "mucsi96/${local.namespace}-server"
-  host       = "app-server"
-  port       = 8080
-  database   = local.database
+  source          = "./modules/server"
+  namespace       = local.namespace
+  image_name      = "mucsi96/${local.namespace}-server"
+  host            = "app-server"
+  port            = 8080
+  database        = local.database
+  management_port = 8082
 }
 
 module "database" {
