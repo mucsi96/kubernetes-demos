@@ -67,5 +67,5 @@ Create the name of the service account to use
 
 {{- define "ingress.tls" -}}
 tls:
-  secretName: {{ .Release.Name }}-{{ required "Missing tlsSecretName value" .Values.tlsSecretName }}
+  secretName: {{ required "Missing tlsSecretName value" .Values.tlsSecretName }}
 {{- end }}
