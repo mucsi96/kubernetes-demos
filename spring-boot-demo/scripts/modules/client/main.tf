@@ -14,6 +14,7 @@ resource "null_resource" "image" {
         --tag ${var.image_name}:${data.local_file.image_version.content} \
         --tag ${var.image_name}:latest
       docker push ${var.image_name} --all-tags
+      echo "New image published ${var.image_name}:${data.local_file.image_version.content}"
     EOT
   }
 
