@@ -71,8 +71,9 @@ module "kubernetes-dashboard" {
 }
 
 module "spring-boot-admin" {
-  source    = "./modules/spring-boot-admin"
-  namespace = local.namespace
-  host      = local.spring-boot-admin.host
-  port      = local.spring-boot-admin.port
+  source     = "./modules/spring-boot-admin"
+  namespace  = local.namespace
+  image_name = "mucsi96/${local.namespace}-admin-server"
+  host       = local.spring-boot-admin.host
+  port       = local.spring-boot-admin.port
 }

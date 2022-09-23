@@ -100,6 +100,7 @@ set_version() {
 
 set_version image server
 set_version image client
+set_version image spring-boot-admin
 set_version chart client
 set_version chart server
 set_version chart database
