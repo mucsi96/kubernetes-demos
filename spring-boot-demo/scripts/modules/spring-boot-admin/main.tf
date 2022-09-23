@@ -9,7 +9,7 @@ data "local_file" "chart_version" {
 resource "null_resource" "image" {
   provisioner "local-exec" {
     command = <<-EOT
-      docker build ../server \
+      docker build ../spring-boot-admin \
         --quiet \
         --tag ${var.image_name}:${data.local_file.image_version.content} \
         --tag ${var.image_name}:latest
