@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @EnableAdminServer
+/* test */
 public class SpringBootAdminApplication {
 
 	public static void main(String[] args) {
