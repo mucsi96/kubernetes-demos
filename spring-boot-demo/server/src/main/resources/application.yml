@@ -33,6 +33,6 @@ spring:
         url: http://${env.ADMIN_SERVER_HOST}:${env.ADMIN_SERVER_PORT}
         instance:
           name: spring-boot-demo
-          service-base-url: http://${K8S_POD_IP}:8080
-          management-base-url: http://${K8S_POD_IP}:${env.MANAGEMENT_SERVER_PORT}
+          service-base-url: http://${env.K8S_POD_IP}:8080
+          management-base-url: http://${env.K8S_POD_IP}:${env.MANAGEMENT_SERVER_PORT}
         auto-deregistration: true
