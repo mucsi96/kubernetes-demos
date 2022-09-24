@@ -25,9 +25,4 @@ resource "helm_release" "prometheus" {
     name  = "server.resources.requests.memory"
     value = "30Mi"
   }
-
-  # set {
-  #   name  = "alertmanager.enabled"
-  #   value = false
-  # }
 }

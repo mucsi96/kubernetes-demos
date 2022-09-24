@@ -5,4 +5,10 @@ resource "helm_release" "grafana" {
   namespace        = var.namespace
   create_namespace = true
   version          = "6.38.7"
+
+  values = [
+    templatefile("templates/grafana-values.yaml", {
+      prometheus_host = "${helm_release.prometheus.name}-server"
+    })
+  ]
 }
