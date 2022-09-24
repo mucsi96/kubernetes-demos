@@ -77,3 +77,8 @@ module "spring-boot-admin" {
   host       = local.spring-boot-admin.host
   port       = local.spring-boot-admin.port
 }
+
+module "monitoring" {
+  source    = "./modules/monitoring"
+  namespace = "monitoring"
+}
