@@ -10,19 +10,19 @@ datasources:
    datasources:
    - name: Prometheus
      type: prometheus
-     url: http://my-prometheus-server
+     url: http://${prometheus_host}
      access: proxy
      isDefault: true
 
-dashboards:
-    kube-dash:
-      gnetId: 6663
-      revision: 1
-      datasource: Prometheus
-    kube-official-dash:
-      gnetId: 2
-      revision: 1
-      datasource: Prometheus
+# dashboards:
+#     kube-dash:
+#       gnetId: 6663
+#       revision: 1
+#       datasource: Prometheus
+#     kube-official-dash:
+#       gnetId: 2
+#       revision: 1
+#       datasource: Prometheus
 
 dashboardProviders:
   dashboardproviders.yaml:
