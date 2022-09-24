@@ -7,7 +7,7 @@ resource "helm_release" "prometheus" {
   version          = "15.13.0"
 
   values = [
-    templatefile("${path.module}/templates/prometheus-values", {})
+    templatefile("${path.module}/templates/prometheus-values.yaml", {})
   ]
 }
 
