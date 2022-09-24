@@ -7,7 +7,7 @@ resource "helm_release" "grafana" {
   version          = "6.38.7"
 
   values = [
-    templatefile("templates/grafana-values.yaml", {
+    templatefile("${path.module}/templates/grafana-values.yaml", {
       prometheus_host = "${helm_release.prometheus.name}-server"
     })
   ]
