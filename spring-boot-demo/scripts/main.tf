@@ -78,8 +78,8 @@ module "spring-boot-admin" {
   port       = local.spring-boot-admin.port
 }
 
-module "monitoring" {
-  source    = "./modules/monitoring"
-  namespace = "monitoring"
-  database  = local.database
-}
+# module "monitoring" {
+#   source    = "./modules/monitoring"
+#   namespace = "monitoring"
+#   database  = local.database
+# }
