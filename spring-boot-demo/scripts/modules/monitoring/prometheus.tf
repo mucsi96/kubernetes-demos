@@ -6,23 +6,16 @@ resource "helm_release" "prometheus" {
   repository       = "https://prometheus-community.github.io/helm-charts"
   version          = "15.13.0"
 
-  set {
-    name  = "server.resources.limits.cpu"
-    value = "400m"
-  }
+  values = [
+    templatefile("${path.module}/templates/prometheus-values", {})
+  ]
+}
 
-  set {
-    name  = "server.resources.limits.memory"
-    value = "500Mi"
-  }
-
-  set {
-    name  = "server.resources.requests.cpu"
-    value = "100m"
-  }
-
-  set {
-    name  = "server.resources.requests.memory"
-    value = "30Mi"
-  }
+resource "helm_release" "kube-state-metrics" {
+  chart            = "kube-state-metrics"
+  name             = "kube-state-metrics"
+  namespace        = var.namespace
+  create_namespace = true
+  repository       = "https://prometheus-community.github.io/helm-charts"
+  version          = "4.20.0"
 }

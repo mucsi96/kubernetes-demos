@@ -1,0 +1,15 @@
+server:
+  resources:
+    limits:
+      cpu: 400m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 30Mi
+
+serverFiles:
+  prometheus.yml:
+    scrape_configs:
+      - job_name: kube-state-metrics
+        static_configs:
+          - targets: ["kube-state-metrics.kube-system.svc.cluster.local:8080"]

@@ -81,4 +81,5 @@ module "spring-boot-admin" {
 module "monitoring" {
   source    = "./modules/monitoring"
   namespace = "monitoring"
+  database  = local.database
 }
