@@ -17,7 +17,7 @@ datasources:
         type: mysql
         url: ${database.host}:${database.port}
         database: ${database.name}
-        user: ${database.user}
+        user: ${database.username}
         secureJsonData:
           password: ${database.password}
 
