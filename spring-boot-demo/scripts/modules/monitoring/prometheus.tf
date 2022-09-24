@@ -30,9 +30,4 @@ resource "helm_release" "prometheus" {
     name  = "alertmanager.enabled"
     value = false
   }
-
-  set {
-    name  = "server.name"
-    value = var.prometheus_host
-  }
 }
