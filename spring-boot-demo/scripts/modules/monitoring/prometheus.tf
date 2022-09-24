@@ -1,9 +1,10 @@
 resource "helm_release" "prometheus" {
-  chart      = "prometheus"
-  name       = "prometheus"
-  namespace  = var.namespace
-  repository = "https://prometheus-community.github.io/helm-charts"
-  version    = "15.13.0"
+  chart            = "prometheus"
+  name             = "prometheus"
+  namespace        = var.namespace
+  create_namespace = true
+  repository       = "https://prometheus-community.github.io/helm-charts"
+  version          = "15.13.0"
 
   set {
     name  = "server.resources.limits.cpu"
