@@ -83,8 +83,7 @@ module "monitoring" {
   source    = "./modules/monitoring"
   namespace = "monitoring"
   client = {
-    namespace  = local.namespace
-    host       = "app-client"
-    stats_port = 8033
+    namespace = local.namespace
+    name      = "app-client"
   }
 }
