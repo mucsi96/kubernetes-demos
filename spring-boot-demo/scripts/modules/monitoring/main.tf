@@ -8,7 +8,7 @@ resource "helm_release" "kube-prometheus-stack" {
 }
 
 resource "helm_release" "nginx-prometheus-exporter" {
-  chart            = "nginx-prometheus-exporter"
+  chart            = "nginx-exporter"
   name             = "nginx-prometheus-exporter"
   namespace        = var.namespace
   create_namespace = true
