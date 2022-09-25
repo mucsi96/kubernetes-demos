@@ -39,12 +39,7 @@ resource "helm_release" "chart" {
   }
 
   set {
-    name  = "service.statsPort"
-    value = var.stats_port
-  }
-
-  set {
-    name  = "nginx-exporter.nginxServer"
-    value = "http://${var.host}:${var.stats_port}/stub_status"
+    name  = "service.metricsPort"
+    value = var.metrics_port
   }
 }

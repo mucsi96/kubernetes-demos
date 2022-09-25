@@ -14,6 +14,6 @@ variable "port" {
   type = number
 }
 
-variable "stats_port" {
+variable "metrics_port" {
   type = number
 }

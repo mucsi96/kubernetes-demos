@@ -18,12 +18,12 @@ locals {
 }
 
 module "client" {
-  source     = "./modules/client"
-  namespace  = local.namespace
-  image_name = "mucsi96/${local.namespace}-client"
-  host       = "app-client"
-  port       = 80
-  stats_port = 8033
+  source       = "./modules/client"
+  namespace    = local.namespace
+  image_name   = "mucsi96/${local.namespace}-client"
+  host         = "app-client"
+  port         = 80
+  metrics_port = 8085
 }
 
 module "server" {

@@ -12,7 +12,7 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-    - port: {{ required "Missing service.port value" .Values.service.metricsPort }}
+    - port: {{ required "Missing service.metricsPort value" .Values.service.metricsPort }}
       targetPort: metrics
       protocol: TCP
       name: metrics
