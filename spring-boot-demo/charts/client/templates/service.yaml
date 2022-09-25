@@ -4,10 +4,8 @@ kind: Service
 metadata:
   name: {{ $fullName }}
   labels:
+    scrape: "nginx"
     {{- include "app.labels" . | nindent 4 }}
-  annotations:
-    prometheus.io/scrape: "true"
-    prometheus.io/port: "metrics"
 spec:
   type: {{ .Values.service.type }}
   ports:

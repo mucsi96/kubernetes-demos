@@ -80,10 +80,7 @@ module "spring-boot-admin" {
 }
 
 module "monitoring" {
-  source    = "./modules/monitoring"
-  namespace = "monitoring"
-  client = {
-    namespace = local.namespace
-    name      = "app-client"
-  }
+  source           = "./modules/monitoring"
+  namespace        = "monitoring"
+  scrape_namespace = local.namespace
 }

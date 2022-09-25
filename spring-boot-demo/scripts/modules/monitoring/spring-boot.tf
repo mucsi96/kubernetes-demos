@@ -1,10 +1,10 @@
 # CRD Ref: https://prometheus-operator.dev/docs/operator/api/#monitoring.coreos.com/v1.ServiceMonitor
-resource "kubernetes_manifest" "nginx_service_monitor" {
+resource "kubernetes_manifest" "spring_boot_service_monitor" {
   manifest = {
     apiVersion = "monitoring.coreos.com/v1"
     kind       = "ServiceMonitor"
     metadata = {
-      name      = "nginx"
+      name      = "spring-boot"
       namespace = var.namespace
       labels = {
         "release" = helm_release.kube-prometheus-stack.name
@@ -12,15 +12,15 @@ resource "kubernetes_manifest" "nginx_service_monitor" {
     }
     spec = {
       endpoints = [{
-        port = "metrics"
-        path = "/metrics"
+        port = "management"
+        path = "/actuator/prometheus"
       }]
       namespaceSelector = {
         matchNames = [var.scrape_namespace]
       }
       selector = {
         matchLabels = {
-          scrape = "nginx"
+          scrape : "spring-boot"
         }
       }
     }
