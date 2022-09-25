@@ -7,23 +7,23 @@ resource "helm_release" "kube-prometheus-stack" {
   version          = "40.1.2"
 }
 
-resource "helm_release" "nginx-prometheus-exporter" {
-  chart            = "nginx-exporter"
-  name             = "nginx-prometheus-exporter"
-  namespace        = var.namespace
-  create_namespace = true
-  repository       = "https://nexclipper.github.io/helm-charts"
-  version          = "0.1.3"
+# resource "helm_release" "nginx-prometheus-exporter" {
+#   chart            = "nginx-exporter"
+#   name             = "nginx-prometheus-exporter"
+#   namespace        = var.namespace
+#   create_namespace = true
+#   repository       = "https://nexclipper.github.io/helm-charts"
+#   version          = "0.1.3"
 
-  values = [
-    <<EOT
-nginxServer: "http://app-client.spring-boot-demo.svc.cluster.local:8080/stub_status"
-serviceMonitor:
-  labels:
-    release: "${helm_release.kube-prometheus-stack.name}"
-EOT
-  ]
-}
+#   values = [
+#     <<EOT
+# nginxServer: "http://app-client.spring-boot-demo.svc.cluster.local:8080/stub_status"
+# serviceMonitor:
+#   labels:
+#     release: "${helm_release.kube-prometheus-stack.name}"
+# EOT
+#   ]
+# }
 
 resource "kubernetes_config_map" "traefik_dashboard" {
   metadata {
