@@ -27,9 +27,9 @@ resource "kubernetes_manifest" "spring_boot_service_monitor" {
   }
 }
 
-resource "kubernetes_config_map" "nginx_dashboard" {
+resource "kubernetes_config_map" "jvm-micrometer_dashboard" {
   metadata {
-    name      = "nginx-dashboard"
+    name      = "jvm-micrometer-dashboard"
     namespace = var.namespace
     labels = {
       grafana_dashboard = 1
@@ -37,6 +37,6 @@ resource "kubernetes_config_map" "nginx_dashboard" {
   }
 
   data = {
-    "nginx_rev1.json" = file("${path.module}/dashboards/nginx_rev1.json")
+    "jvm-micrometer_rev1.json" = file("${path.module}/dashboards/jvm-micrometer_rev1.json")
   }
 }
