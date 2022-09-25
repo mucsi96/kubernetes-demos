@@ -19,6 +19,7 @@ resource "helm_release" "nginx-prometheus-exporter" {
     <<EOT
 nginxServer: "http://${var.client.host}.${var.client.namespace}.svc.cluster.local:${var.client.stats_port}/stub_status"
 serviceMonitor:
+  enabled: true
   labels:
     release: "${helm_release.kube-prometheus-stack.name}"
 EOT
