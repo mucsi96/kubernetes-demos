@@ -37,4 +37,9 @@ resource "helm_release" "chart" {
     name  = "service.port"
     value = var.port
   }
+
+  set {
+    name  = "service.statsPort"
+    value = var.stats_port
+  }
 }

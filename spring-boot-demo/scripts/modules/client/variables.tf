@@ -13,3 +13,7 @@ variable "host" {
 variable "port" {
   type = number
 }
+
+variable "stats_port" {
+  type = number
+}

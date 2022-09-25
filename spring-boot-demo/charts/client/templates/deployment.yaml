@@ -28,7 +28,8 @@ spec:
         ports:
         - name: http
           containerPort: 80
-        - containerPort: 8033
+        - name: stats
+          containerPort: 8033
         livenessProbe:
           httpGet:
             path: /?liveness
