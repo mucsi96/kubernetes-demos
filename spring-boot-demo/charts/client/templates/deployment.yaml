@@ -28,8 +28,6 @@ spec:
         ports:
         - name: http
           containerPort: 80
-        - name: stats
-          containerPort: 8033
         livenessProbe:
           httpGet:
             path: /?liveness
@@ -48,3 +46,22 @@ spec:
             port: http
           failureThreshold: 20
           periodSeconds: 5
+      - name: {{ .Chart.Name }}-prometheus-exporter
+        image: "nginx/nginx-prometheus-exporter:011"
+        args:
+          - "-nginx.scrape-uri=http://localhost:8033/stub_status"
+        ports:
+          - name: metrics
+            containerPort: 9113
+        livenessProbe:
+          httpGet:
+            path: /
+            port: metrics
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: metrics
+          initialDelaySeconds: 30
+          timeoutSeconds: 10

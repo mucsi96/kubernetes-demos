@@ -12,9 +12,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-    - port: {{ required "Missing service.port value" .Values.service.statsPort }}
-      targetPort: stats
+    - port: {{ required "Missing service.port value" .Values.service.metricsPort }}
+      targetPort: metrics
       protocol: TCP
-      name: stats
+      name: metrics
   selector:
     {{- include "app.selectorLabels" . | nindent 4 }}
