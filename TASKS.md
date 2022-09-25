@@ -9,3 +9,4 @@
 - Create new repo for tf modules
 - Create new repo for cluster
 - Add traefik meterics to grafana dashboard https://github.com/cablespaghetti/k3s-monitoring
+- Try versioning without patching charts
