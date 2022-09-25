@@ -18,3 +18,8 @@ spec:
       name: metrics
   selector:
     {{- include "app.selectorLabels" . | nindent 4 }}
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "metrics"
