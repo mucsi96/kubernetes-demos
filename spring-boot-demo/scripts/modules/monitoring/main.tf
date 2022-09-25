@@ -32,7 +32,7 @@ resource "kubernetes_manifest" "traefik_servicemonitor" {
     spec = {
       endpoints = [{ port : "metrics" }]
       namespaceSelector = {
-        matchNames = "kube-system"
+        matchNames = ["kube-system"]
       }
       selector = {
         matchLabels = {
