@@ -11,3 +11,4 @@
 - Add traefik meterics to grafana dashboard https://github.com/cablespaghetti/k3s-monitoring
 - Try versioning without patching charts
 - Connect modules using output's 
+- add Spring metrics https://mokkapps.de/blog/monitoring-spring-boot-application-with-micrometer-prometheus-and-grafana-using-custom-metrics
