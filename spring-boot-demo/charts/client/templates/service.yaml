@@ -5,6 +5,9 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "app.labels" . | nindent 4 }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "metrics"
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -18,8 +21,3 @@ spec:
       name: metrics
   selector:
     {{- include "app.selectorLabels" . | nindent 4 }}
-  template:
-    metadata:
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "metrics"
