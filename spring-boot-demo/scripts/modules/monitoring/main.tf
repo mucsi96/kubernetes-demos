@@ -30,7 +30,7 @@ resource "kubernetes_manifest" "traefik_servicemonitor" {
       namespace = var.namespace
     }
     spec = {
-      endpoints = [{ port : metrics }]
+      endpoints = [{ port : "metrics" }]
       namespaceSelector = {
         matchNames = "kube-system"
       }
