@@ -1,6 +1,5 @@
 - generate random secrets https://registry.terraform.io/providers/hashicorp/random/latest/docs
 - create scripts to expose database
-- add metrics https://rpi4cluster.com/monitoring/monitor-intro/ https://k3s.rocks/metrics/ https://getbetterdevops.io/terraform-with-helm/ 
 - add logging https://grafana.com/blog/2022/04/26/set-up-and-observe-a-spring-boot-application-with-grafana-cloud-prometheus-and-opentelemetry/ https://getbetterdevops.io/terraform-with-helm/
 - add scheduled backups from db to s3 (mysqldumb)
 - add e2e tests https://bonigarcia.dev/selenium-jupiter/
@@ -8,7 +7,7 @@
 - Modularize docker login, kubectl auth and versioning. Use module output as dependeny
 - Create new repo for tf modules
 - Create new repo for cluster
-- Add traefik meterics to grafana dashboard https://github.com/cablespaghetti/k3s-monitoring
 - Try versioning without patching charts
 - Connect modules using output's 
-- add Spring metrics https://mokkapps.de/blog/monitoring-spring-boot-application-with-micrometer-prometheus-and-grafana-using-custom-metrics
+- use only git for versioning
+- add databse metrics
