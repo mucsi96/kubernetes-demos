@@ -34,6 +34,7 @@ resource "helm_release" "chart" {
   }
 }
 
+# CRD Ref: https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.Certificate
 resource "kubernetes_manifest" "tls_certificate" {
   manifest = {
     apiVersion = "cert-manager.io/v1"
@@ -53,6 +54,7 @@ resource "kubernetes_manifest" "tls_certificate" {
   }
 }
 
+# CRD Ref: https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.ClusterIssuer
 resource "kubernetes_manifest" "tls_issuer" {
   manifest = {
     apiVersion = "cert-manager.io/v1"

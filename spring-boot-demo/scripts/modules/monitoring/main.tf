@@ -21,6 +21,7 @@ resource "kubernetes_config_map" "grafana_dashboards" {
   }
 }
 
+# CRD Ref: https://prometheus-operator.dev/docs/operator/api/#monitoring.coreos.com/v1.PodMonitor
 resource "kubernetes_manifest" "traefik_pod_monitor" {
   manifest = {
     apiVersion = "monitoring.coreos.com/v1"
@@ -28,6 +29,9 @@ resource "kubernetes_manifest" "traefik_pod_monitor" {
     metadata = {
       name      = "traefik"
       namespace = var.namespace
+      labels = {
+        "release" = helm_release.kube-prometheus-stack.name
+      }
     }
     spec = {
       podMetricsEndpoints = [{
