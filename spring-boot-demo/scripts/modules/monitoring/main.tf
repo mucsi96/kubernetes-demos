@@ -21,22 +21,25 @@ resource "kubernetes_config_map" "grafana_dashboards" {
   }
 }
 
-resource "kubernetes_manifest" "traefik_servicemonitor" {
+resource "kubernetes_manifest" "traefik_pod_monitor" {
   manifest = {
     apiVersion = "monitoring.coreos.com/v1"
-    kind       = "ServiceMonitor"
+    kind       = "PodMonitor"
     metadata = {
       name      = "traefik"
       namespace = var.namespace
     }
     spec = {
-      endpoints = [{ port : "metrics" }]
+      podMetricsEndpoints = [{
+        port = "metrics"
+        path = "/metrics"
+      }]
       namespaceSelector = {
         matchNames = ["kube-system"]
       }
       selector = {
         matchLabels = {
-          app = "traefik"
+          "app.kubernetes.io/name" = "traefik"
         }
       }
     }
