@@ -5,6 +5,10 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "app.labels" . | nindent 4 }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "management"
+    prometheus.io/path: "/actuator/prometheus"
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,5 +16,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - port: {{ required "Missing service.managementPort value" .Values.service.managementPort }}
+      targetPort: management
+      protocol: TCP
+      name: management
   selector:
     {{- include "app.selectorLabels" . | nindent 4 }}

@@ -44,6 +44,11 @@ resource "helm_release" "chart" {
   }
 
   set {
+    name  = "service.managementPort"
+    value = var.management_port
+  }
+
+  set {
     name  = "database.name"
     value = var.database.name
   }
@@ -66,11 +71,6 @@ resource "helm_release" "chart" {
   set {
     name  = "database.password"
     value = var.database.password
-  }
-
-  set {
-    name  = "managementPort"
-    value = var.management_port
   }
 
   set {

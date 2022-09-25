@@ -14,6 +14,10 @@ variable "port" {
   type = number
 }
 
+variable "management_port" {
+  type = number
+}
+
 variable "database" {
   type = object({
     name     = string,
@@ -22,10 +26,6 @@ variable "database" {
     username = string,
     password = string
   })
-}
-
-variable "management_port" {
-  type = string
 }
 
 variable "admin_server" {
