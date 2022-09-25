@@ -15,17 +15,14 @@ resource "helm_release" "nginx-prometheus-exporter" {
   repository       = "https://nexclipper.github.io/helm-charts"
   version          = "0.1.3"
 
-  set {
-    name  = "nginxServer"
-    value = "http://app-client.spring-boot-demo.svc.cluster.local:8080/stub_status"
-  }
-
-  set {
-    name = "serviceMonitor.labels"
-    value = {
-      "release" = helm_release.kube-prometheus-stack.name
-    }
-  }
+  values = [
+    <<EOT
+nginxServer: "http://app-client.spring-boot-demo.svc.cluster.local:8080/stub_status"
+serviceMonitor:
+  labels:
+    release: "${helm_release.kube-prometheus-stack.name}"
+EOT
+  ]
 }
 
 resource "kubernetes_config_map" "traefik_dashboard" {
