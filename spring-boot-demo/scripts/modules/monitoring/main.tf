@@ -31,7 +31,7 @@ resource "kubernetes_config_map" "traefik_dashboard" {
     name      = "traefik-dashboard"
     namespace = var.namespace
     labels = {
-      grafana_dashboard = true
+      grafana_dashboard = 1
     }
   }
 
@@ -45,7 +45,7 @@ resource "kubernetes_config_map" "nginx_dashboard" {
     name      = "nginx-dashboard"
     namespace = var.namespace
     labels = {
-      grafana_dashboard = true
+      grafana_dashboard = 1
     }
   }
 
