@@ -3,19 +3,19 @@
 cd client
 prev_commit=
 prev_sha=
-prev_tag=$(git describe --match=client-image-*-*)
+prev_tag=$(git describe --tags --match=client-image-*-* --abbrev=0)
 retVal=$?
 if [ $retVal -eq 0 ]
 then
     prev_sha=$(echo "$prev_tag" | sed "s/^client-image-//" | cut -d "-" -f 2)
-    prev_commit=$(git rev-list -n 1 $prev_tag)
+    prev_commit=$(git show $prev_tag | sed -n "1p" | cut -d " " -f 2)
 fi
-current_commit=$(git rev-parse HEAD)
+current_commit=$(git show HEAD | sed -n "1p" | cut -d " " -f 2)
 current_sha=$(git ls-files -z | sed 's/^/\.\//' -z | sort -z | xargs -0 sha1sum | sha1sum | awk '{print $1}' | cut -c 1-8)
 
 if [[ "$current_commit" == "$prev_commit" ]]
 then
-    echo "Current commit is already tagged $current_commit $prev_commit"
+    echo "Current commit is already tagged $prev_tag"
     exit 0
 fi
 
