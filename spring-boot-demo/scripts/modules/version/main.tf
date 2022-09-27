@@ -1,6 +1,7 @@
 resource "null_resource" "command" {
   provisioner "local-exec" {
-    command = <<-EOT
+    interpreter = ["/bin/bash", "-c"]
+    command     = <<-EOT
       cd ${abspath(var.path)}
       prev_commit=
       prev_sha=
