@@ -1,19 +1,7 @@
-data "local_file" "image_version" {
-  filename = "../client/version.txt"
-}
-
 module "image_version" {
-  source = "../version"
-  name   = "client-image"
-  path   = abspath("../client")
-}
-
-resource "null_resource" "command" {
-  provisioner "local-exec" {
-    command = <<-EOT
-      echo "${module.image_version.version}"
-    EOT
-  }
+  source       = "../version"
+  patag_prefix = "client-image"
+  path         = "../client"
 }
 
 data "local_file" "chart_version" {
@@ -25,15 +13,11 @@ resource "null_resource" "image" {
     command = <<-EOT
       docker build ../client \
         --quiet \
-        --tag ${var.image_name}:${data.local_file.image_version.content} \
+        --tag ${var.image_name}:${module.image_version.version} \
         --tag ${var.image_name}:latest
       docker push ${var.image_name} --all-tags
-      echo "New image published ${var.image_name}:${data.local_file.image_version.content}"
+      echo "New image published ${var.image_name}:${module.image_version.version}"
     EOT
-  }
-
-  triggers = {
-    version = data.local_file.image_version.content
   }
 }
 
