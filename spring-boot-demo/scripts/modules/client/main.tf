@@ -1,7 +1,7 @@
 module "image_version" {
-  source       = "../version"
-  patag_prefix = "client-image"
-  path         = "../client"
+  source     = "../version"
+  tag_prefix = "client-image"
+  path       = "../client"
 }
 
 data "local_file" "chart_version" {
