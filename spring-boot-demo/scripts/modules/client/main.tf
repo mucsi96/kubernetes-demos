@@ -4,8 +4,11 @@ module "image_version" {
   path       = "../client"
 }
 
-data "local_file" "chart_version" {
-  filename = "../charts/client/version.txt"
+module "chart_version" {
+  source      = "../helm-chart-version"
+  app_version = module.image_version.version
+  tag_prefix  = "client-chart"
+  path        = "../charts/client"
 }
 
 resource "null_resource" "image" {
@@ -23,7 +26,7 @@ resource "null_resource" "image" {
 
 resource "helm_release" "chart" {
   name             = var.host
-  version          = data.local_file.chart_version.content
+  version          = module.chart_version.version
   namespace        = var.namespace
   create_namespace = true
   chart            = "../charts/client"
