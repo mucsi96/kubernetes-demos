@@ -10,5 +10,6 @@ data "external" "version" {
   query = {
     app_version   = var.app_version
     chart_version = module.chart_version.version
+    timestamp     = timestamp()
   }
 }
