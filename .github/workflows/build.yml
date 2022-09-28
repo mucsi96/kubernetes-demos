@@ -43,8 +43,8 @@ jobs:
         run: ./version.sh
         working-directory: ./spring-boot-demo
       - name: Deploy
-        # env:
-        #   TF_LOG: TRACE
+        env:
+          TF_LOG: TRACE
         run: |
             terraform fmt -check -diff
             terraform init
