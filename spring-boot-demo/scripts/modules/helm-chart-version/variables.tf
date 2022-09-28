@@ -1,5 +1,6 @@
 variable "app_version" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "path" {

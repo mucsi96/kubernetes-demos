@@ -1,10 +1,12 @@
-data "local_file" "database_chart_version" {
-  filename = "../charts/database/version.txt"
+module "chart_version" {
+  source     = "../helm-chart-version"
+  tag_prefix = "database-chart"
+  path       = "../charts/database"
 }
 
 resource "helm_release" "chart" {
   name             = var.host
-  version          = data.local_file.database_chart_version.content
+  version          = module.chart_version.version
   namespace        = var.namespace
   create_namespace = true
   chart            = "../charts/database"

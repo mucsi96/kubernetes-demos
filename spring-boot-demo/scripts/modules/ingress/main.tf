@@ -2,13 +2,15 @@ locals {
   issuer_name = "tls-issuer"
 }
 
-data "local_file" "ingress_chart_version" {
-  filename = "../charts/ingress/version.txt"
+module "chart_version" {
+  source     = "../helm-chart-version"
+  tag_prefix = "ingress-chart"
+  path       = "../charts/ingress"
 }
 
 resource "helm_release" "chart" {
   name             = "app-ingress"
-  version          = data.local_file.ingress_chart_version.content
+  version          = module.chart_version.version
   namespace        = var.namespace
   create_namespace = true
   chart            = "../charts/ingress"
