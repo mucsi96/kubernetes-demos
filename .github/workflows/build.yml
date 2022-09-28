@@ -12,10 +12,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Check jq
-        shell: bash
-        run: |
-          jq --version
       - name: Authenticate to Docker Hub
         shell: bash
         run: |
@@ -39,9 +35,6 @@ jobs:
               --cluster appcluster \
               --user appuser
             kubectl config use-context appcontext
-      - name: Update versions
-        run: ./version.sh
-        working-directory: ./spring-boot-demo
       - name: Deploy
         # env:
         #   TF_LOG: TRACE
