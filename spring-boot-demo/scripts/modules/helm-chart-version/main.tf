@@ -5,7 +5,7 @@ module "chart_version" {
 }
 
 data "external" "version" {
-  program     = ["bash", "${path.module}/command.sh"]
+  program     = [abspath("${path.module}/command.sh")]
   working_dir = var.path
   query = {
     app_version   = var.app_version
