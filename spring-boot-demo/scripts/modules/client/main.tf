@@ -9,6 +9,10 @@ module "chart_version" {
   app_version = module.image_version.version
   tag_prefix  = "client-chart"
   path        = "../charts/client"
+
+  depends_on = [
+    module.image_version
+  ]
 }
 
 resource "null_resource" "image" {
@@ -31,7 +35,8 @@ resource "helm_release" "chart" {
   create_namespace = true
   chart            = "../charts/client"
   depends_on = [
-    null_resource.image
+    null_resource.image,
+    module.chart_version
   ]
 
   set {
