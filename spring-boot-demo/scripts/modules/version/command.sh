@@ -3,6 +3,7 @@
 # Exit if any of the intermediate steps fail
 set -e
 
+read -d EOF
 tag_prefix=$(echo "$REPLY" | jq -r .tag_prefix)
 
 if [[ -z "$tag_prefix" ]]
