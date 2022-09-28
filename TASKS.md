@@ -11,3 +11,4 @@
 - Connect modules using output's 
 - use only git for versioning
 - add databse metrics
+- use External Data Source for versioning as it runs in plane phase https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/data_source

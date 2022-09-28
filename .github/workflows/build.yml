@@ -12,12 +12,18 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Check jq
+        shell: bash
+        run: |
+          jq --version
       - name: Authenticate to Docker Hub
+        shell: bash
         run: |
             docker login \
               --username ${{ secrets.DOCKER_HUB_USERNAME }} \
               --password ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Authenticate to Kubernetes cluster
+        shell: bash
         run: |
             mkdir ~/.kube
             echo "${{ secrets.KUBERNETES_CLUSTER_CA_CERTIFICATE }}" > ~/.kube/cluster_ca_certificate.pem
