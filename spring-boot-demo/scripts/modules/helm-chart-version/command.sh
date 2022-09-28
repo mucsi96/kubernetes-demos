@@ -9,13 +9,13 @@ chart_version=$(echo "$REPLY" | jq -r .chart_version)
 
 if [[ -z "$app_version" ]]
 then
-    echo "Missing chart_version"
+    echo "Missing chart_version" >&2
     exit 2
 fi
 
 if [[ -z "$chart_version" ]]
 then
-    echo "Missing chart_version"
+    echo "Missing chart_version" >&2
     exit 3
 fi
 

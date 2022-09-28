@@ -7,7 +7,7 @@ tag_prefix=$(echo "$REPLY" | jq -r .tag_prefix)
 
 if [[ -z "$tag_prefix" ]]
 then
-    echo "Missing tag_prefix"
+    echo "Missing tag_prefix" >&2
     exit 2
 fi
 
