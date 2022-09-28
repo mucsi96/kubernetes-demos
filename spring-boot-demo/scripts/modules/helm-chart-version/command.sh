@@ -16,7 +16,7 @@ fi
 if [[ -z "$app_version" ]]
 then
     new_version="$chart_version"
-elif
+else
     new_version="$chart_version.$app_version"
     sed -i "s/^appVersion:.*$/appVersion: \"$app_version\"/" Chart.yaml
 fi
