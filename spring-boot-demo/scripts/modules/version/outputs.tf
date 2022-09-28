@@ -1,3 +1,3 @@
 output "version" {
-  value = data.local_file.version.content
+  value = data.external.version.result.version
 }

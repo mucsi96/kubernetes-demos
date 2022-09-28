@@ -4,13 +4,11 @@ module "chart_version" {
   path       = var.path
 }
 
-resource "null_resource" "command" {
-  provisioner "local-exec" {
-    interpreter = ["/bin/bash", "-c"]
-    command     = <<-EOT
-      cd ${abspath(var.path)}
-      sed -i "s/^appVersion:.*$/appVersion: \"${var.app_version}\"/" Chart.yaml
-      sed -i "s/^version:.*$/version: \"${module.chart_version.version}.${var.app_version}\"/" Chart.yaml
-    EOT
+data "external" "version" {
+  program     = ["${path.module}/command.sh"]
+  working_dir = var.path
+  query = {
+    app_version   = var.app_version
+    chart_version = module.chart_version.version
   }
 }
