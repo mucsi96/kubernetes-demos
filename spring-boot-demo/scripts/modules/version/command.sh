@@ -3,7 +3,13 @@
 # Exit if any of the intermediate steps fail
 set -e
 
-eval "$(jq -r '@sh "tag_prefix=\(.tag_prefix)"')"
+tag_prefix=$(echo "$REPLY" | jq -r .tag_prefix)
+
+if [[ -z "$tag_prefix" ]]
+then
+    echo "Missing tag_prefix"
+    exit 2
+fi
 
 prev_commit=
 prev_sha=
@@ -20,7 +26,7 @@ current_sha=$(git ls-files -z | sed 's/^/\.\//' -z | sort -z | xargs -0 sha1sum 
 if [[ "$current_commit" == "$prev_commit" ]]
 then
     echo "Current commit is already tagged $prev_tag"
-    exit 127
+    exit 3
 fi
 
 latest_version=$(git tag --list --sort=taggerdate $tag_prefix-*-* | tail -1 | sed "s/^$tag_prefix-//" | cut -d "-" -f 1)

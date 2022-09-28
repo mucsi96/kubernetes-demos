@@ -3,7 +3,21 @@
 # Exit if any of the intermediate steps fail
 set -e
 
-eval "$(jq -r '@sh "app_version=\(.app_version)" chart_version=\(.chart_version)"')"
+read -d EOF
+app_version=$(echo "$REPLY" | jq -r .app_version)
+chart_version=$(echo "$REPLY" | jq -r .chart_version)
+
+if [[ -z "$app_version" ]]
+then
+    echo "Missing chart_version"
+    exit 2
+fi
+
+if [[ -z "$chart_version" ]]
+then
+    echo "Missing chart_version"
+    exit 3
+fi
 
 new_version="$chart_version.$app_version"
 
