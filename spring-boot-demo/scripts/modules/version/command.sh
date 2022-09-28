@@ -26,8 +26,9 @@ current_sha=$(git ls-files -z | sed 's/^/\.\//' -z | sort -z | xargs -0 sha1sum 
 
 if [[ "$current_commit" == "$prev_commit" ]]
 then
-    echo "Current commit is already tagged $prev_tag" >&2
-    exit 3
+    version=$(echo "$prev_tag" | sed "s/^$tag_prefix-//" | cut -d "-" -f 1)
+    jq -n --arg version "$version" '{"version":$version}'
+    exit 0
 fi
 
 latest_version=$(git tag --list --sort=taggerdate $tag_prefix-*-* | tail -1 | sed "s/^$tag_prefix-//" | cut -d "-" -f 1)
