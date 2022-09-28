@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Exit if any of the intermediate steps fail
-set -e
+# set -e
 
 read -d EOF
 app_version=$(echo "$REPLY" | jq -r .app_version)
