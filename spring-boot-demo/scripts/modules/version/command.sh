@@ -48,4 +48,4 @@ then
     git push --tags
 fi
 
-jq -n --arg verson "$new_version" '{"verson":"$verson"}'
+jq -n --arg verson "$new_version" '{"verson":$verson}'

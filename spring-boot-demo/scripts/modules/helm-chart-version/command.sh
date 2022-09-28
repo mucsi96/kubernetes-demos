@@ -14,4 +14,4 @@ sed -i "s/^version:.*$/version: \"$new_version\"/" Chart.yaml
 
 echo "new_version: $new_version"
 
-jq -n --arg verson "$new_version" '{"verson":"$verson"}'
+jq -n --arg verson "$new_version" '{"verson":$verson}'
