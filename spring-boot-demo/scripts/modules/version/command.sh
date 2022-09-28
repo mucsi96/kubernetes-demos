@@ -5,8 +5,6 @@ set -e
 
 eval "$(jq -r '@sh "tag_prefix=\(.tag_prefix)"')"
 
-echo "tag_prefix: $tag_prefix"
-
 prev_commit=
 prev_sha=
 prev_tag=$(git describe --tags --match=$tag_prefix-*-* --abbrev=0)
@@ -22,7 +20,7 @@ current_sha=$(git ls-files -z | sed 's/^/\.\//' -z | sort -z | xargs -0 sha1sum 
 if [[ "$current_commit" == "$prev_commit" ]]
 then
     echo "Current commit is already tagged $prev_tag"
-    exit 0
+    exit 127
 fi
 
 latest_version=$(git tag --list --sort=taggerdate $tag_prefix-*-* | tail -1 | sed "s/^$tag_prefix-//" | cut -d "-" -f 1)
@@ -30,22 +28,19 @@ new_version=
 if [[ -z "$latest_version" ]]
 then
     new_version=1
-    echo "No previous version found for $tag_prefix. New version: $new_version"
 else
     if [[ "$current_sha" == "$prev_sha" ]]
     then
         new_version=$latest_version
-        echo "Same sha for $tag_prefix $prev_sha $current_sha. New version: $new_version"
     else
         new_version=$((latest_version + 1))
-        echo "Different sha for $tag_prefix $prev_sha $current_sha. New version: $new_version"
     fi
 fi
 
 if [[ "$new_version" != "$latest_version" ]]
 then
     git tag "$tag_prefix-$new_version-$current_sha"
-    git push --tags
+    git push --tags > /dev/null
 fi
 
 jq -n --arg verson "$new_version" '{"verson":$verson}'
