@@ -23,9 +23,9 @@ resource "null_resource" "image" {
     EOT
   }
 
-  depends_on = [
-    module.image_version
-  ]
+  triggers = {
+    version = module.image_version.version
+  }
 }
 
 resource "helm_release" "chart" {
