@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Exit if any of the intermediate steps fail
-set -e
+# set -e
 
+echo "ok1" >&2
 read -d EOF
+echo "ok2" >&2
 tag_prefix=$(echo "$REPLY" | jq -r .tag_prefix)
 
 if [[ -z "$tag_prefix" ]]
