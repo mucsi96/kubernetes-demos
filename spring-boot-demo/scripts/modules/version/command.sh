@@ -43,4 +43,4 @@ then
     git push --tags > /dev/null
 fi
 
-jq -n --arg verson "$new_version" '{"verson":$verson}'
+jq -n --arg version "$new_version" '{"version":$version}'
