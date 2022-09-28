@@ -9,10 +9,6 @@ module "chart_version" {
   app_version = module.image_version.version
   tag_prefix  = "client-chart"
   path        = "../charts/client"
-
-  depends_on = [
-    module.image_version
-  ]
 }
 
 resource "null_resource" "image" {
@@ -26,6 +22,10 @@ resource "null_resource" "image" {
       echo "New image published ${var.image_name}:${module.image_version.version}"
     EOT
   }
+
+  depends_on = [
+    module.image_version
+  ]
 }
 
 resource "helm_release" "chart" {
@@ -35,8 +35,7 @@ resource "helm_release" "chart" {
   create_namespace = true
   chart            = "../charts/client"
   depends_on = [
-    null_resource.image,
-    module.chart_version
+    null_resource.image
   ]
 
   set {
