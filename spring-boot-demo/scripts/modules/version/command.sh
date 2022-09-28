@@ -12,7 +12,7 @@ then
     exit 2
 fi
 
-prev_tag=$(git describe --tags --match=$tag_prefix-*-* --abbrev=0)
+prev_tag=$(git describe --tags --match=$tag_prefix-* --abbrev=0)
 if [ $? -eq 0 ]
 then
     git diff --quiet HEAD $prev_tag -- .
@@ -24,7 +24,7 @@ then
     fi
 fi
 
-latest_version=$(git tag --list --sort=taggerdate $tag_prefix-*-* | tail -1 | sed "s/^$tag_prefix-//")
+latest_version=$(git tag --list --sort=taggerdate $tag_prefix-* | tail -1 | sed "s/^$tag_prefix-//")
 new_version=
 if [[ -z "$latest_version" ]]
 then
