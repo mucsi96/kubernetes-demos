@@ -48,5 +48,8 @@ jobs:
         run: |
             terraform fmt -check -diff
             terraform init
+            terraform plan
+            terraform show -json plan.json
+            cat plan.json
             terraform apply -auto-approve -input=false
         working-directory: ./spring-boot-demo/scripts
