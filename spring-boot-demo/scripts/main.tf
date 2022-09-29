@@ -46,6 +46,7 @@ module "database" {
   root_password = local.database.root_password
   username      = local.database.username
   password      = local.database.password
+  metrics_port  = 8085
 }
 
 module "ingress" {
