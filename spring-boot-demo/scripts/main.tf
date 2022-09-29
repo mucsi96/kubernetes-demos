@@ -35,10 +35,6 @@ module "server" {
   database        = local.database
   management_port = 8082
   admin_server    = local.spring-boot-admin
-
-  depends_on = [
-    module.database
-  ]
 }
 
 module "database" {
@@ -81,10 +77,6 @@ module "spring-boot-admin" {
   image_name = "mucsi96/${local.namespace}-admin-server"
   host       = local.spring-boot-admin.host
   port       = local.spring-boot-admin.port
-
-  depends_on = [
-    module.server
-  ]
 }
 
 module "monitoring" {
