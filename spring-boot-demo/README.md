@@ -4,8 +4,14 @@
 
 Install `kubeseal` from [https://github.com/bitnami-labs/sealed-secrets/releases](latest releases)
 
-```
+```bash
 ./create-secret
+```
+
+## Unlock terraform
+
+```bash
+kubectl delete leases.coordination.k8s.io lock-tfstate-default-state -n default
 ```
 
 ## Resources:

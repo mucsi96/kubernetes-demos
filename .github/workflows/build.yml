@@ -35,11 +35,14 @@ jobs:
               --cluster appcluster \
               --user appuser
             kubectl config use-context appcontext
-      - name: Deploy
+      - name: Terraform format
+        run: terraform fmt -check -diff
+      - name: Terraform init
+        run: terraform init
+      - name: Terraform plan
+        run: terraform plan
+      - name: Terraform apply
         # env:
         #   TF_LOG: TRACE
-        run: |
-            terraform fmt -check -diff
-            terraform init
-            terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false
         working-directory: ./spring-boot-demo/scripts
