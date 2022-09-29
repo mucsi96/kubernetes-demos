@@ -1,19 +1,3 @@
-terraform {
-  required_providers {
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "2.22.0"
-    }
-  }
-}
-
-provider "docker" {
-  registry_auth {
-    address     = "registry-1.docker.io"
-    config_file = pathexpand("~/.docker/config.json")
-  }
-}
-
 module "image_version" {
   source     = "../version"
   tag_prefix = "client-image"
@@ -27,34 +11,22 @@ module "chart_version" {
   path        = "../charts/client"
 }
 
-resource "docker_registry_image" "image" {
-  name = "${var.image_name}:${module.image_version.version}"
+resource "null_resource" "image" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      docker build ../client \
+        --quiet \
+        --tag ${var.image_name}:${module.image_version.version} \
+        --tag ${var.image_name}:latest
+      docker push ${var.image_name} --all-tags
+      echo "New image published ${var.image_name}:${module.image_version.version}"
+    EOT
+  }
 
-  build {
-    context = "../client"
-    build_args = {
-      "--quiet" : "",
-      "--tag" : "${var.image_name}:latest"
-    }
+  triggers = {
+    version = module.image_version.version
   }
 }
-
-# resource "null_resource" "image" {
-#   provisioner "local-exec" {
-#     command = <<-EOT
-#       docker build ../client \
-#         --quiet \
-#         --tag ${var.image_name}:${module.image_version.version} \
-#         --tag ${var.image_name}:latest
-#       docker push ${var.image_name} --all-tags
-#       echo "New image published ${var.image_name}:${module.image_version.version}"
-#     EOT
-#   }
-
-#   triggers = {
-#     version = module.image_version.version
-#   }
-# }
 
 resource "helm_release" "chart" {
   name             = var.host
@@ -63,7 +35,7 @@ resource "helm_release" "chart" {
   create_namespace = true
   chart            = "../charts/client"
   depends_on = [
-    resource.docker_registry_image.image
+    resource.null_resource.image
   ]
 
   set {
