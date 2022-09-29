@@ -1,6 +1,5 @@
 - generate random secrets https://registry.terraform.io/providers/hashicorp/random/latest/docs
 - create scripts to expose database
-- add logging https://grafana.com/blog/2022/04/26/ https://rpi4cluster.com/monitoring/k3s-logging/set-up-and-observe-a-spring-boot-application-with-grafana-cloud-prometheus-and-opentelemetry/ https://getbetterdevops.io/terraform-with-helm/
 - add scheduled backups from db to s3 (mysqldumb)
 - add e2e tests https://bonigarcia.dev/selenium-jupiter/
 - create interactive main script
@@ -9,4 +8,4 @@
 - Create new repo for cluster
 - Try versioning without patching charts
 - Connect modules using output's 
-- add databse metrics
+- add database metrics

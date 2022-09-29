@@ -49,6 +49,38 @@ spec:
         volumeMounts:
           - mountPath: /var/lib/mysql
             name: ssv
+      - name: {{ .Chart.Name }}-prometheus-exporter
+        image: "prom/mysqld-exporter:0.14.0"
+        ports:
+          - name: metrics
+            containerPort: 9104
+        env:
+          - name: MYSQL_DATABASE
+            value: {{ required "Missing name value" .Values.name }}
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ $fullName }}
+                key: userName
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ $fullName }}
+                key: password
+          - name: DATA_SOURCE_NAME
+            value: "$(MYSQL_USER):$(MYSQL_PASSWORD)@(localhost:3306)/$(MYSQL_DATABASE)"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: metrics
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: metrics
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
       volumes:
       - name: ssv
         persistentVolumeClaim:
