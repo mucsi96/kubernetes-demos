@@ -3,8 +3,7 @@
 - add scheduled backups from db to s3 (mysqldumb)
 - add e2e tests https://bonigarcia.dev/selenium-jupiter/
 - create interactive main script
-- Modularize docker login, kubectl auth and versioning. Use module output as dependeny
+- Modularize docker publishing. Use module output as dependeny.
 - Create new repo for tf modules
 - Create new repo for cluster
-- Try versioning without patching charts
 - Connect modules using output's 

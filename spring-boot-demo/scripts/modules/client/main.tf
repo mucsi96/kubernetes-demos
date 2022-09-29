@@ -11,22 +11,34 @@ module "chart_version" {
   path        = "../charts/client"
 }
 
-resource "null_resource" "image" {
-  provisioner "local-exec" {
-    command = <<-EOT
-      docker build ../client \
-        --quiet \
-        --tag ${var.image_name}:${module.image_version.version} \
-        --tag ${var.image_name}:latest
-      docker push ${var.image_name} --all-tags
-      echo "New image published ${var.image_name}:${module.image_version.version}"
-    EOT
-  }
+resource "docker_registry_image" "image" {
+  name = "${var.image_name}:${module.image_version.version}"
 
-  triggers = {
-    version = module.image_version.version
+  build {
+    context = "../client"
+    build_args = {
+      "--quiet" : "",
+      "--tag" : "${var.image_name}:latest"
+    }
   }
 }
+
+# resource "null_resource" "image" {
+#   provisioner "local-exec" {
+#     command = <<-EOT
+#       docker build ../client \
+#         --quiet \
+#         --tag ${var.image_name}:${module.image_version.version} \
+#         --tag ${var.image_name}:latest
+#       docker push ${var.image_name} --all-tags
+#       echo "New image published ${var.image_name}:${module.image_version.version}"
+#     EOT
+#   }
+
+#   triggers = {
+#     version = module.image_version.version
+#   }
+# }
 
 resource "helm_release" "chart" {
   name             = var.host
@@ -35,7 +47,7 @@ resource "helm_release" "chart" {
   create_namespace = true
   chart            = "../charts/client"
   depends_on = [
-    null_resource.image
+    resource.docker_registry_image.image
   ]
 
   set {
