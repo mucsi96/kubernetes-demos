@@ -41,8 +41,8 @@ jobs:
         run: terraform fmt -check -diff
       - name: Terraform init
         run: terraform init
-      - name: Terraform plan -out=tfplan.json -json
-        run: terraform plan -input=false
+      - name: Terraform plan
+        run: terraform plan -input=false -out=tfplan.json -json
       - run: cat tfplan.json
       - name: Terraform apply tfplan.json
         # env:
