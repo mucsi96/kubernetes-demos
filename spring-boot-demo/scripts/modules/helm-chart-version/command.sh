@@ -22,6 +22,6 @@ else
 fi
 
 
-# sed -i "s/^version:.*$/version: \"$new_version\"/" Chart.yaml
+sed -i "s/^version:.*$/version: \"$new_version\"/" Chart.yaml
 
 jq -n --arg version "$new_version" '{"version":$version}'
