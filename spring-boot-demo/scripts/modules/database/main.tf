@@ -35,4 +35,9 @@ resource "helm_release" "chart" {
     name  = "password"
     value = var.password
   }
+
+  set {
+    name  = "service.metricsPort"
+    value = var.metrics_port
+  }
 }

@@ -25,3 +25,7 @@ variable "username" {
 variable "password" {
   type = string
 }
+
+variable "metrics_port" {
+  type = number
+}
