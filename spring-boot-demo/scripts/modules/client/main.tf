@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "2.22.0"
+    }
+  }
+}
+
 module "image_version" {
   source     = "../version"
   tag_prefix = "client-image"
