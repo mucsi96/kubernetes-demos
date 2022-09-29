@@ -1,6 +1,6 @@
-resource "kubernetes_config_map" "nginx_dashboard" {
+resource "kubernetes_config_map" "logs_dashboard" {
   metadata {
-    name      = "nginx-dashboard"
+    name      = "logs-dashboard"
     namespace = var.namespace
     labels = {
       grafana_dashboard = 1
