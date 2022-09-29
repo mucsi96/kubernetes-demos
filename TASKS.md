@@ -8,4 +8,3 @@
 - Create new repo for cluster
 - Try versioning without patching charts
 - Connect modules using output's 
-- add database metrics
