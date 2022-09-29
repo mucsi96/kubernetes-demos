@@ -9,5 +9,4 @@
 - Create new repo for cluster
 - Try versioning without patching charts
 - Connect modules using output's 
-- use only git for versioning
 - add databse metrics

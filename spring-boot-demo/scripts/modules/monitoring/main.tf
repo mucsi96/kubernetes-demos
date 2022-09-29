@@ -5,6 +5,10 @@ resource "helm_release" "kube-prometheus-stack" {
   create_namespace = true
   repository       = "https://prometheus-community.github.io/helm-charts"
   version          = "40.1.2"
+
+  values = [
+    file("${path.module}/values-kube-prometheus-stack.yaml")
+  ]
 }
 
 resource "helm_release" "loki-stack" {
