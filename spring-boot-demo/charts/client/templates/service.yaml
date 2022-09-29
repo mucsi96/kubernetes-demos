@@ -5,6 +5,7 @@ metadata:
   name: {{ $fullName }}
   labels:
     scrape: "nginx"
+    test: "true"
     {{- include "app.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
