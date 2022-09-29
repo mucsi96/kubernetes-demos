@@ -43,7 +43,7 @@ jobs:
         run: terraform init
       - name: Terraform plan
         run: terraform plan -input=false -out=tfplan
-      - name: Terraform apply tfplan
+      - name: Terraform apply
         # env:
         #   TF_LOG: TRACE
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve  tfplan
