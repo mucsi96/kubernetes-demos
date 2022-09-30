@@ -33,17 +33,17 @@ resource "helm_release" "chart" {
 
   set {
     name  = "rootPassword"
-    value = random_password.root_password
+    value = random_password.root_password.result
   }
 
   set {
     name  = "userName"
-    value = random_pet.username
+    value = random_pet.username.id
   }
 
   set {
     name  = "password"
-    value = random_password.password
+    value = random_password.password.result
   }
 
   set {

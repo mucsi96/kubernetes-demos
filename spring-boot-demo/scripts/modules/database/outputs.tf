@@ -11,11 +11,11 @@ output "name" {
 }
 
 output "username" {
-  value = random_pet.username
+  value = random_pet.username.id
 }
 
 output "password" {
-  value = random_password.password
+  value = random_password.password.result
 }
 
 output "metrics_port" {
