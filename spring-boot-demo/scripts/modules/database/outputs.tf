@@ -3,7 +3,7 @@ output "host" {
 }
 
 output "port" {
-  value = var.host
+  value = var.port
 }
 
 output "name" {
