@@ -8,4 +8,14 @@ grafana:
       access: proxy
       url: http://loki-stack.monitoring:3100
       version: 1
+    - name: MySQL
+      type: mysql
+      isDefault: false
+      access: proxy
+      url: http://${database.host}.${namespace}:${database.port}
+      database: ${database.name}
+      user: ${database.username}
+      secureJsonData:
+        password: ${database.password}
+      version: 1
   
