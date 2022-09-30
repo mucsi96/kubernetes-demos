@@ -1,3 +1,7 @@
+locals {
+  namespace = "spring-boot-demo"
+}
+
 module "client" {
   source     = "./modules/client"
   namespace  = local.namespace
