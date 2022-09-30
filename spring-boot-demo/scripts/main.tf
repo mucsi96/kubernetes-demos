@@ -31,11 +31,11 @@ module "server" {
   host       = "app-server"
   port       = 8080
   database = {
-    host       = module.database.host
-    port       = module.database.port
-    name       = module.database.name
-    username   = module.database.username
-    papassword = module.database.papassword
+    host     = module.database.host
+    port     = module.database.port
+    name     = module.database.name
+    username = module.database.username
+    password = module.database.password
   }
   management_port = 8082
   admin_server    = local.spring-boot-admin
