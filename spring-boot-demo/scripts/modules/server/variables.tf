@@ -7,15 +7,18 @@ variable "image_name" {
 }
 
 variable "host" {
-  type = string
+  type    = string
+  default = "app-server"
 }
 
 variable "port" {
-  type = number
+  type    = number
+  default = 8080
 }
 
 variable "management_port" {
-  type = number
+  type    = number
+  default = 8082
 }
 
 variable "database" {

@@ -1,21 +1,7 @@
-locals {
-  hostname                  = "demo.ibari.ch"
-  namespace                 = "spring-boot-demo"
-  email                     = "mucsi96@gmail.com"
-  certificate_issuer_server = "https://acme-v02.api.letsencrypt.org/directory"
-  spring-boot-admin = {
-    host = "spring-boot-admin-server"
-    port = 9090
-  }
-}
-
 module "client" {
-  source       = "./modules/client"
-  namespace    = local.namespace
-  image_name   = "mucsi96/${local.namespace}-client"
-  host         = "app-client"
-  port         = 80
-  metrics_port = 8085
+  source     = "./modules/client"
+  namespace  = local.namespace
+  image_name = "mucsi96/${local.namespace}-client"
 }
 
 module "database" {
@@ -28,8 +14,6 @@ module "server" {
   source     = "./modules/server"
   namespace  = local.namespace
   image_name = "mucsi96/${local.namespace}-server"
-  host       = "app-server"
-  port       = 8080
   database = {
     host     = module.database.host
     port     = module.database.port
@@ -37,19 +21,15 @@ module "server" {
     username = module.database.username
     password = module.database.password
   }
-  management_port = 8082
-  admin_server    = local.spring-boot-admin
+  admin_server = module.spring-boot-admin.host
 }
 
 module "ingress" {
-  source                    = "./modules/ingress"
-  namespace                 = local.namespace
-  hostname                  = local.hostname
-  client_host               = "app-client"
-  server_host               = "app-server"
-  certificate_issue_email   = local.email
-  certificate_issuer_server = local.certificate_issuer_server
-  tls_secret_name           = "app-tls-secret"
+  source      = "./modules/ingress"
+  namespace   = local.namespace
+  hostname    = "demo.ibari.ch"
+  client_host = module.client.host
+  server_host = module.server.host
 }
 
 module "cert-manager" {
@@ -68,8 +48,6 @@ module "spring-boot-admin" {
   source     = "./modules/spring-boot-admin"
   namespace  = local.namespace
   image_name = "mucsi96/${local.namespace}-admin-server"
-  host       = local.spring-boot-admin.host
-  port       = local.spring-boot-admin.port
 }
 
 module "monitoring" {

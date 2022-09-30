@@ -3,7 +3,8 @@ variable "namespace" {
 }
 
 variable "tls_secret_name" {
-  type = string
+  type    = string
+  default = "app-tls-secret"
 }
 
 variable "hostname" {
@@ -19,9 +20,11 @@ variable "server_host" {
 }
 
 variable "certificate_issuer_server" {
-  type = string
+  type    = string
+  default = "https://acme-v02.api.letsencrypt.org/directory"
 }
 
 variable "certificate_issue_email" {
-  type = string
+  type    = string
+  default = "mucsi96@gmail.com"
 }

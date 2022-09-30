@@ -7,10 +7,12 @@ variable "image_name" {
 }
 
 variable "host" {
-  type = string
+  type    = string
+  default = "spring-boot-admin-server"
 }
 
 variable "port" {
-  type = number
+  type    = number
+  default = 9090
 }
 

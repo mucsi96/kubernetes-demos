@@ -7,13 +7,16 @@ variable "image_name" {
 }
 
 variable "host" {
-  type = string
+  type    = string
+  default = "app-client"
 }
 
 variable "port" {
-  type = number
+  type    = number
+  default = 80
 }
 
 variable "metrics_port" {
-  type = number
+  type    = number
+  default = 8085
 }
