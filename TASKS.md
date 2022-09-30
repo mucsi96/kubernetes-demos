@@ -1,5 +1,3 @@
-- generate random secrets https://registry.terraform.io/providers/hashicorp/random/latest/docs
-- create scripts to expose database
 - add scheduled backups from db to s3 (mysqldumb)
 - add e2e tests https://bonigarcia.dev/selenium-jupiter/
 - create interactive main script

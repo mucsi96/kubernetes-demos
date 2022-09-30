@@ -11,11 +11,11 @@ output "name" {
 }
 
 output "username" {
-  value = var.username
+  value = random_pet.username
 }
 
 output "password" {
-  value = var.password
+  value = random_password.password
 }
 
 output "metrics_port" {

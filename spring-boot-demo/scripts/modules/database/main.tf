@@ -4,6 +4,16 @@ module "chart_version" {
   path       = "../charts/database"
 }
 
+resource "random_pet" "username" {}
+
+resource "random_password" "password" {
+  length = 16
+}
+
+resource "random_password" "root_password" {
+  length = 16
+}
+
 resource "helm_release" "chart" {
   name             = var.host
   version          = module.chart_version.version
@@ -23,17 +33,17 @@ resource "helm_release" "chart" {
 
   set {
     name  = "rootPassword"
-    value = var.root_password
+    value = random_password.root_password
   }
 
   set {
     name  = "userName"
-    value = var.username
+    value = random_pet.username
   }
 
   set {
     name  = "password"
-    value = var.password
+    value = random_password.password
   }
 
   set {
