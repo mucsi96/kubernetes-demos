@@ -25,7 +25,10 @@ module "server" {
     username = module.database.username
     password = module.database.password
   }
-  admin_server = module.spring-boot-admin.host
+  admin_server = {
+    host = module.spring-boot-admin.host
+    port = module.spring-boot-admin.port
+  }
 }
 
 module "ingress" {
