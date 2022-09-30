@@ -21,6 +21,7 @@ module "client" {
 module "database" {
   source    = "./modules/database"
   namespace = local.namespace
+  name      = local.namespace
 }
 
 module "server" {

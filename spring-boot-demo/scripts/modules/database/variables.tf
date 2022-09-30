@@ -13,8 +13,7 @@ variable "port" {
 }
 
 variable "name" {
-  type    = string
-  default = var.namespace
+  type = string
 }
 
 variable "root_password" {
