@@ -61,11 +61,4 @@ module "monitoring" {
   source           = "./modules/monitoring"
   namespace        = "monitoring"
   scrape_namespace = local.namespace
-  database = {
-    host     = module.database.host
-    port     = module.database.port
-    name     = module.database.name
-    username = module.database.username
-    password = module.database.password
-  }
 }

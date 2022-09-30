@@ -7,10 +7,7 @@ resource "helm_release" "kube-prometheus-stack" {
   version          = "40.1.2"
 
   values = [
-    templatefile("${path.module}/templates/values-kube-prometheus-stack.yaml", {
-      namespace = var.scrape_namespace
-      database  = var.database
-    })
+    file("${path.module}/templates/values-kube-prometheus-stack.yaml")
   ]
 }
 
