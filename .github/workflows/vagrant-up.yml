@@ -45,5 +45,5 @@ jobs:
       - name: Install Kubernetes
         run: ansible-playbook -i inventory install-k3s.yml 
       
-      - name: List Kubernetes nodes
-        run: kubectl --kubeconfig .kube_config get nodes
+      - name: Install deployment
+        run: ansible-playbook -i inventory install-deployment.yml 

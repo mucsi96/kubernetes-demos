@@ -1,0 +1,36 @@
+- name: Kubernetes deployment
+  hosts: cluster
+  gather_facts: false
+  tasks:
+    - name: Set cluster host
+      ansible.builtin.set_fact:
+        cluster_host: "{{ ansible_host }}"
+    - name: Create k8s namespace
+      kubernetes.core.k8s:
+        state: present
+        kind: namespace
+        name: ansible-demos
+        kubeconfig: .kube_config
+      delegate_to: localhost
+    - name: Create k8s resources
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('ansible.builtin.template', 'templates/' + item) }}"
+        wait: true
+        kubeconfig: .kube_config
+      with_items:
+        - deployment.yml
+        - service.yml
+        - ingress-route.yaml
+      vars:
+        name: client
+        namespace: ansible-demos
+        image: mucsi96/ansible-demos-client:4
+      delegate_to: localhost
+    - name: Test a request to the service.
+      ansible.builtin.uri:
+        url: http://{{ cluster_host }}
+      delegate_to: localhost
+    - name: Print the URL for hello-k8s.
+      ansible.builtin.debug:
+        msg: http://{{ cluster_host }}
