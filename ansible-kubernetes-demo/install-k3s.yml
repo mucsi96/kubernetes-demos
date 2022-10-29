@@ -80,23 +80,23 @@
       args:
         chdir: "~"
         creates: k3s_install_log.txt
-    - name: Fetch config
+    - name: Load k3s config
       become: true
-      ansible.builtin.fetch:
+      ansible.builtin.slurp:
         src: /etc/rancher/k3s/k3s.yaml
-        dest: ./.kube_config
-        flat: true
-    - name: Fix config host
-      ansible.builtin.replace:
-        path: ./.kube_config
-        regexp: "127.0.0.1"
-        replace: "{{ inventory_hostname }}"
-      delegate_to: 127.0.0.1
-    - name: Fix config
-      ansible.builtin.lineinfile:
-        path: ./.kube_config
-        insertafter: "server: https"
-        line: "    insecure-skip-tls-verify: false"
+      register: kube_config
+    - name: Parse k3s config
+      ansible.builtin.set_fact:
+        kube_config: "{{ kube_config.content | b64decode | from_yaml }}"
+    - name: Create local k3s config
+      ansible.builtin.copy:
+        dest: .kube_config
+        content: "{{ lookup('ansible.builtin.template', 'templates/kube-config.yaml') }}"
+        mode: 0444
+      vars:
+        certificate_authority_data: "{{ kube_config.clusters.0.cluster['certificate-authority-data'] }}"
+        client_certificate_data: "{{ kube_config.users.0.user['client-certificate-data'] }}"
+        client_key_data: "{{ kube_config.users.0.user['client-key-data'] }}"
       delegate_to: 127.0.0.1
 
   handlers:
