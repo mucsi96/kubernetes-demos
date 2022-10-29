@@ -11,12 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get Python cache working-directory
-        run: pip3 cache dir
-
-      - name: Install Python requirements
-        run: pip3 install -r requirements.txt
-
       - name: Cache Python requirements
         uses: actions/cache@v3
         with:
@@ -32,6 +26,12 @@ jobs:
           key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
           restore-keys: |
             ${{ runner.os }}-vagrant-
+
+      - name: Get Python cache working-directory
+        run: pip3 cache dir
+
+      - name: Install Python requirements
+        run: pip3 install -r requirements.txt
 
       - name: Show Vagrant version
         run: vagrant --version
