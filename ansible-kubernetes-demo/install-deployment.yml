@@ -21,7 +21,7 @@
       with_items:
         - deployment.yml
         - service.yml
-        - ingress-route
+        - ingress-route.yml
       vars:
         name: client
         namespace: ansible-demos
