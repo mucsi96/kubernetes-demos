@@ -1,0 +1,6 @@
+[all:vars]
+ansible_user=vagrant
+ansible_ssh_pass=vagrant
+
+[cluster]
+192.168.33.10

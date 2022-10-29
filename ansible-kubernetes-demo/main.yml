@@ -1,0 +1,26 @@
+- name: New SSH user
+  hosts: cluster
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/main.yaml
+
+  tasks:
+    - name: Update Root user's Password
+      ansible.builtin.user:
+        name: root
+        state: present
+        password: "{{ root_password | password_hash('sha512', 65534 | random(seed=inventory_hostname) | string) }}"
+    - name: Enable Root SSH Login
+      ansible.builtin.lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: "^#?PermitRootLogin"
+        line: "PermitRootLogin yes"
+        state: present
+      notify:
+        - Restart ssh
+  handlers:
+    - name: Restart ssh
+      ansible.builtin.service:
+        name: sshd
+        state: restarted
