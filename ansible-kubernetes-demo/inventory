@@ -5,4 +5,4 @@ ansible_port=2222
 ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
 
 [cluster]
-127.0.0.1
+192.168.33.10
