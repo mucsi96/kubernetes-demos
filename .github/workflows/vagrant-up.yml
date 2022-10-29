@@ -27,3 +27,9 @@ jobs:
 
       - name: Show SSH Config
         run: vagrant ssh-config
+      
+      - name: Install Kubernetes
+        run: ansible-playbook -i inventory install-k3s.yml 
+      
+      - name: List Kubernetes nodes
+        run: kubectl get nodes
