@@ -12,7 +12,7 @@
         name: ansible-demos
         kubeconfig: .kube_config
       delegate_to: localhost
-    - name: Create k8s resources
+    - name: Add deployment and service
       kubernetes.core.k8s:
         state: present
         definition: "{{ lookup('ansible.builtin.template', 'templates/' + item) }}"
@@ -21,11 +21,19 @@
       with_items:
         - deployment.yml
         - service.yml
-        - ingress-route.yaml
       vars:
         name: client
         namespace: ansible-demos
         image: mucsi96/ansible-demos-client:4
+    - name: Add ingress route
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('ansible.builtin.template', 'templates/ingress-route.yaml') }}"
+        wait: true
+        kubeconfig: .kube_config
+      vars:
+        name: client
+        namespace: ansible-demos
       delegate_to: localhost
     - name: Test a request to the service.
       ansible.builtin.uri:
