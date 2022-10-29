@@ -93,7 +93,7 @@
     - name: Create local k3s config
       ansible.builtin.copy:
         dest: .kube_config
-        content: "{{ lookup('ansible.builtin.template', 'templates/kube-config.yaml') }}"
+        content: "{{ lookup('ansible.builtin.template', 'templates/kube-config.yml') }}"
         mode: 0444
       vars:
         certificate_authority_data: "{{ kube_config.clusters.0.cluster['certificate-authority-data'] }}"
