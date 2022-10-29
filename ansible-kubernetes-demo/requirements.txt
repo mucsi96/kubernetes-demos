@@ -1,2 +1,2 @@
-ansible
-kubernetes
+ansible == 6.5.0
+kubernetes == 24.2.0
