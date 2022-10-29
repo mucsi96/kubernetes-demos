@@ -8,8 +8,6 @@ jobs:
     defaults:
       run:
         working-directory: ./ansible-kubernetes-demo
-    env:
-      ANSIBLE_HOST_KEY_CHECKING: False
     steps:
       - uses: actions/checkout@v3
 
