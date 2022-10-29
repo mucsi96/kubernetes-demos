@@ -25,6 +25,7 @@
         name: client
         namespace: ansible-demos
         image: mucsi96/ansible-demos-client:4
+      delegate_to: localhost
     - name: Add ingress route
       kubernetes.core.k8s:
         state: present
