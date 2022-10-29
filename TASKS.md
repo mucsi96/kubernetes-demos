@@ -1,5 +1,4 @@
 - add scheduled backups from db to s3 (mysqldumb)
 - add e2e tests https://bonigarcia.dev/selenium-jupiter/
 - create interactive main script
-- Create new repo for tf modules
-- Create new repo for cluster
+- deploy kubernetes with ansible without delegate_to: localhost

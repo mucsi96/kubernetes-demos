@@ -80,6 +80,8 @@
       args:
         chdir: "~"
         creates: k3s_install_log.txt
+      environment:
+        INSTALL_K3S_VERSION: v1.25.2+k3s1
     - name: Load k3s config
       become: true
       ansible.builtin.slurp:
