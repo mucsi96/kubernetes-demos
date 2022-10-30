@@ -92,7 +92,7 @@
       become: true
       ansible.builtin.pip:
         name:
-          - kubernetes == 24.2.0
+          - kubernetes == 25.3.0
 
     - name: Load k3s config
       become: true
