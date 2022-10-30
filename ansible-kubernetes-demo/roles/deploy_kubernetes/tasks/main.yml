@@ -9,7 +9,7 @@
 - name: Add deployment and service
   kubernetes.core.k8s:
     state: present
-    definition: "{{ lookup('ansible.builtin.template', 'templates/' + item) }}"
+    definition: "{{ lookup('ansible.builtin.template', item) }}"
     wait: true
   with_items:
     - deployment.yml
