@@ -3,7 +3,7 @@ kind: Config
 clusters:
   - name: cluster
     cluster:
-      server: https://{{ inventory_hostname }}:6443
+      server: https://{{ host }}:6443
       certificate-authority-data: "{{ certificate_authority_data }}"
       insecure-skip-tls-verify: false
 users:

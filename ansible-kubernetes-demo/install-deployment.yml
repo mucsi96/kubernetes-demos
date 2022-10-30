@@ -10,14 +10,11 @@
         state: present
         kind: namespace
         name: ansible-demos
-        kubeconfig: .kube_config
-      delegate_to: localhost
     - name: Add deployment and service
       kubernetes.core.k8s:
         state: present
         definition: "{{ lookup('ansible.builtin.template', 'templates/' + item) }}"
         wait: true
-        kubeconfig: .kube_config
       with_items:
         - deployment.yml
         - service.yml
@@ -26,7 +23,6 @@
         name: client
         namespace: ansible-demos
         image: mucsi96/ansible-demos-client:4
-      delegate_to: localhost
     - name: Test a request to the service.
       ansible.builtin.uri:
         url: http://{{ cluster_host }}

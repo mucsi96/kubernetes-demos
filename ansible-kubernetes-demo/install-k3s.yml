@@ -82,6 +82,18 @@
         creates: k3s_install_log.txt
       environment:
         INSTALL_K3S_VERSION: v1.24.7+k3s1 # https://github.com/k3s-io/k3s/releases
+    
+    - name: Install pip3
+      become: true
+      ansible.builtin.apt:
+        name: python3-pip
+        state: present
+    - name: Install kubernetes client
+      become: true
+      ansible.builtin.pip:
+        name:
+          - kubernetes == 24.2.0
+
     - name: Load k3s config
       become: true
       ansible.builtin.slurp:
@@ -90,16 +102,21 @@
     - name: Parse k3s config
       ansible.builtin.set_fact:
         kube_config: "{{ kube_config.content | b64decode | from_yaml }}"
-    - name: Create local k3s config
+    - name: Create remote kubernetes config folder
+      ansible.builtin.file:
+        path: ~/.kube
+        state: directory
+        mode: 0770
+    - name: Create remote kubernetes config
       ansible.builtin.copy:
-        dest: .kube_config
-        content: "{{ lookup('ansible.builtin.template', 'templates/kube-config.yml') }}"
+        dest: ~/.kube/config
+        content: "{{ lookup('ansible.builtin.template', 'templates/kube-config.yaml') }}"
         mode: 0444
       vars:
         certificate_authority_data: "{{ kube_config.clusters.0.cluster['certificate-authority-data'] }}"
         client_certificate_data: "{{ kube_config.users.0.user['client-certificate-data'] }}"
         client_key_data: "{{ kube_config.users.0.user['client-key-data'] }}"
-      delegate_to: 127.0.0.1
+        host: 127.0.0.1
 
   handlers:
     - name: Start Docker service
