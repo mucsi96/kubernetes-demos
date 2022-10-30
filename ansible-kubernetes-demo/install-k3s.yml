@@ -84,6 +84,7 @@
         INSTALL_K3S_VERSION: v1.25.3+k3s1 # https://github.com/k3s-io/k3s/releases
     
     - name: Install pip3
+      become: true
       ansible.builtin.apt:
         name: python3-pip
         state: present
