@@ -11,7 +11,7 @@
     chdir: "~"
     creates: k3s_install_log.txt
   environment:
-    INSTALL_K3S_VERSION: v1.25.3+k3s1 # https://github.com/k3s-io/k3s/releases
+    INSTALL_K3S_VERSION: "{{ k3s_version }}"
 - name: Load k3s config
   become: true
   ansible.builtin.slurp:
@@ -43,4 +43,4 @@
 - name: Install kubernetes client
   ansible.builtin.pip:
     name:
-      - kubernetes == 25.3.0
+      - kubernetes == {{ kubernetes_client_version }}
