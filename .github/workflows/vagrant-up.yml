@@ -27,11 +27,8 @@ jobs:
           restore-keys: |
             1-${{ runner.os }}-vagrant-
 
-      - name: Get Python cache working-directory
-        run: pip3 cache dir
-
-      - name: Install Python requirements
-        run: pip3 install -r requirements.txt
+      - name: Install Ansible
+        run: pip3 install ansible==6.5.0
 
       - name: Show Vagrant version
         run: vagrant --version
@@ -42,8 +39,5 @@ jobs:
       - name: Show SSH Config
         run: vagrant ssh-config
       
-      - name: Install Kubernetes
-        run: ansible-playbook -i inventory install-k3s.yml 
-      
-      - name: Install deployment
-        run: ansible-playbook -i inventory install-deployment.yml 
+      - name: Deploy
+        run: ansible-playbook main.yml  
