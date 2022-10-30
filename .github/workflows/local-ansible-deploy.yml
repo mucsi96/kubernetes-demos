@@ -3,7 +3,7 @@ name: vagrant-up
 on: [push]
 
 jobs:
-  vagrant-up:
+  local-ansible-deploy:
     runs-on: macos-12
     defaults:
       run:
