@@ -38,6 +38,6 @@ jobs:
 
       - name: Show SSH Config
         run: vagrant ssh-config
-      
+
       - name: Deploy
-        run: ansible-playbook main.yml  
+        run: ansible-playbook main.yml

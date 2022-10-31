@@ -4,4 +4,3 @@
     - install_docker
     - install_k3s
     - deploy_kubernetes
-    
