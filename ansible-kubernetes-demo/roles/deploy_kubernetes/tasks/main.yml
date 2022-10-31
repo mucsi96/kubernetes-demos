@@ -22,6 +22,12 @@
 - name: Test a request to the service.
   ansible.builtin.uri:
     url: http://{{ cluster_host }}
+    return_content: true
+  register: this
+  until: this.status == 200
+  retries: 5
+  delay: 1
+  failed_when: "'Hello from Ansible Demo Page' not in this.content"
   delegate_to: localhost
 - name: Print the URL for hello-k8s.
   ansible.builtin.debug:

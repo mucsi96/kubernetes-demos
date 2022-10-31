@@ -20,6 +20,27 @@
 - name: Parse k3s config
   ansible.builtin.set_fact:
     kube_config: "{{ kube_config.content | b64decode | from_yaml }}"
+
+- name: Create local kubernetes config folder
+  ansible.builtin.file:
+    path: ~/.kube
+    state: directory
+    mode: 0770
+  delegate_to: 127.0.0.1
+  when: create_local_kubernetes_config
+- name: Create local kubernetes config
+  ansible.builtin.copy:
+    dest: ~/.kube/config
+    content: "{{ lookup('ansible.builtin.template', 'kube-config.yml') }}"
+    mode: 0660
+  vars:
+    certificate_authority_data: "{{ kube_config.clusters.0.cluster['certificate-authority-data'] }}"
+    client_certificate_data: "{{ kube_config.users.0.user['client-certificate-data'] }}"
+    client_key_data: "{{ kube_config.users.0.user['client-key-data'] }}"
+    host: "{{ inventory_hostname }}"
+  delegate_to: 127.0.0.1
+  when: create_local_kubernetes_config
+
 - name: Create remote kubernetes config folder
   ansible.builtin.file:
     path: ~/.kube
@@ -29,12 +50,13 @@
   ansible.builtin.copy:
     dest: ~/.kube/config
     content: "{{ lookup('ansible.builtin.template', 'kube-config.yml') }}"
-    mode: 0444
+    mode: 0660
   vars:
     certificate_authority_data: "{{ kube_config.clusters.0.cluster['certificate-authority-data'] }}"
     client_certificate_data: "{{ kube_config.users.0.user['client-certificate-data'] }}"
     client_key_data: "{{ kube_config.users.0.user['client-key-data'] }}"
     host: 127.0.0.1
+
 - name: Install pip3
   become: true
   ansible.builtin.apt:
