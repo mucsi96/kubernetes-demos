@@ -28,7 +28,7 @@ jobs:
             1-${{ runner.os }}-vagrant-
 
       - name: Install Ansible
-        run: pip3 install ansible==6.5.0
+        run: brew install hudochenkov/sshpass/sshpass ansible
 
       - name: Show Vagrant version
         run: vagrant --version
